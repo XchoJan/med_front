@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native'
+import {View, Text, StyleSheet, TextInput, ScrollView} from 'react-native'
 import Container from "../../components/Container";
 import BackButton from "../../components/BackButton";
 import {useNavigation} from "@react-navigation/native";
@@ -13,44 +13,50 @@ const GreetingsScreen6 = () => {
     const [status, setStatus] = React.useState({});
     return (
         <Container containerProp={styles.inlineContainer}>
-            <View>
-                <BackButton  onPress={()=>{navigation.navigate('Greetings5')}}/>
-            </View>
-            <View>
-                <Text style={styles.title_h3}>
-                    Теперь переходим к знакомству с клиентом
-                </Text>
-                <Text>
-                    Видео о пути клиента от старшего сервис-менеджера Александрой Щербаковой
-                </Text>
-            </View>
-            <View style={styles.video_box}>
-                <Video
-                    ref={video}
-                    style={styles.video}
-                    source={{uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
-                    useNativeControls
-                    resizeMode={"contain"}
-                    isLooping
-                    onPlaybackStatusUpdate={status => setStatus(() => status)}
-                />
-            </View>
-            <View style={{flex: 1}}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View>
+                    <BackButton onPress={() => {
+                        navigation.navigate('Greetings5')
+                    }}/>
+                </View>
                 <View>
                     <Text style={styles.title_h3}>
-                        Задание
+                        Теперь переходим к знакомству с клиентом
                     </Text>
                     <Text>
-                        выписать чек-лист первичной консультации (основные пункты для коммуникации с клиентом)
+                        Видео о пути клиента от старшего сервис-менеджера Александрой Щербаковой
                     </Text>
                 </View>
-                <View style={styles.input_box}>
-                    <TextInput placeholder={'Написать'}/>
+                <View style={styles.video_box}>
+                    <Video
+                        ref={video}
+                        style={styles.video}
+                        source={{uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
+                        useNativeControls
+                        resizeMode={"contain"}
+                        isLooping
+                        onPlaybackStatusUpdate={status => setStatus(() => status)}
+                    />
                 </View>
-            </View>
-            <View style={{marginBottom: 25}}>
-                <CustomButton onPress={()=>{navigation.navigate("Greetings7")}} title={'Продолжить'}/>
-            </View>
+                <View style={{marginBottom: 210}}>
+                    <View>
+                        <Text style={styles.title_h3}>
+                            Задание
+                        </Text>
+                        <Text>
+                            выписать чек-лист первичной консультации (основные пункты для коммуникации с клиентом)
+                        </Text>
+                    </View>
+                    <View style={styles.input_box}>
+                        <TextInput placeholder={'Написать'}/>
+                    </View>
+                </View>
+                <View style={{marginBottom: 25}}>
+                    <CustomButton onPress={() => {
+                        navigation.navigate("Greetings7")
+                    }} title={'Продолжить'}/>
+                </View>
+            </ScrollView>
         </Container>
     );
 };

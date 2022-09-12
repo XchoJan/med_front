@@ -25,11 +25,10 @@ const FirstScreen: React.FC = (props) => {
     };
     return (
         <Container>
-            <View>
+            <View style={{flex: 1}}>
                 <Image
                     style={styles.image}
                     source={require('../../assets/images/doctor.png')}/>
-
             </View>
             <View style={styles.wrapper}>
                 <Text style={styles.line}/>
@@ -58,15 +57,14 @@ export default FirstScreen;
 
 const styles = StyleSheet.create({
     image: {
-        width: '100%'
+        width: '100%',
     },
     wrapper: {
         width: '100%',
-        height: '42%',
+        height: '50%',
         backgroundColor: '#fff',
         borderTopRightRadius: 50,
         borderTopLeftRadius: 50,
-        bottom: 40,
     },
     title: {
         textAlign: "center",

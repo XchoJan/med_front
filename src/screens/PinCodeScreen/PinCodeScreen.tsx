@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from "react-native";
 import Container from "../../components/Container";
 import BackButton from "../../components/BackButton";
@@ -9,14 +9,23 @@ import CustomButton from "../../components/CustomButton";
 
 const PinCodeScreen = (props: any) => {
     const navigation: any = useNavigation();
-    let [pin, setPin] = useState(['', '', '', '',]);
-    let [pinCode, setPinCode] = useState('');
     let [validPin, setValidPin] = useState(true);
+    let pin2Ref = useRef(null)
+    let pin3Ref = useRef(null)
+    let pin4Ref = useRef(null)
+    const [pin1, setPin1] = useState('')
+    const [pin2, setPin2] = useState('')
+    const [pin3, setPin3] = useState('')
+    const [pin4, setPin4] = useState('')
 
+    const pin = pin1 + pin2 + pin3 + pin4
+    console.log(pin);
     return (
         <Container containerProp={styles.inlineContainer}>
             <View>
-                <BackButton onPress={()=>{navigation.navigate('CreateAccount')}}/>
+                <BackButton onPress={() => {
+                    navigation.navigate('CreateAccount')
+                }}/>
             </View>
             <View style={styles.number_box}>
                 <Text style={styles.number}>
@@ -27,29 +36,56 @@ const PinCodeScreen = (props: any) => {
                 <View style={styles.pinInput}>
                     <TextInput
                         keyboardType="numeric"
-                        style={{padding: 15}}
+                        style={styles.input}
                         maxLength={1}
+                        onChangeText={(pin1: any) => {
+                            setPin1(pin1)
+                            if (pin1 != ''){
+                                // @ts-ignore
+                                pin2Ref.current.focus()
+                            }
+                        }}
                     />
                 </View>
                 <View style={styles.pinInput}>
                     <TextInput
                         keyboardType="numeric"
-                        style={{padding: 15}}
+                        style={styles.input}
                         maxLength={1}
+                        ref={pin2Ref}
+                        onChangeText={(pin2: any) => {
+                            setPin2(pin2)
+                            if (pin2 != ''){
+                                // @ts-ignore
+                                pin3Ref.current.focus()
+                            }
+                        }}
                     />
                 </View>
                 <View style={styles.pinInput}>
                     <TextInput
                         keyboardType="numeric"
-                        style={{padding: 15}}
+                        style={styles.input}
                         maxLength={1}
+                         ref={pin3Ref}
+                        onChangeText={(pin3: any) => {
+                            setPin3(pin3)
+                            if (pin3 != ''){
+                                // @ts-ignore
+                                pin4Ref.current.focus()
+                            }
+                        }}
                     />
                 </View>
                 <View style={styles.pinInput}>
                     <TextInput
                         keyboardType="numeric"
-                        style={{padding: 15}}
+                        style={styles.input}
                         maxLength={1}
+                         ref={pin4Ref}
+                        onChangeText={(pin4: any) => {
+                            setPin4(pin4)
+                        }}
                     />
                 </View>
             </View>
@@ -68,7 +104,9 @@ const PinCodeScreen = (props: any) => {
                 </Text>
             </View>
             <View style={{marginBottom: 25}}>
-                <CustomButton onPress={()=>{navigation.navigate("Greetings")}} title={'Продолжить'}/>
+                <CustomButton onPress={() => {
+                    navigation.navigate("Greetings")
+                }} title={'Продолжить'}/>
             </View>
         </Container>
     );
@@ -115,5 +153,9 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 15,
         marginVertical: 5
+    },
+    input:{
+        padding: 15,
+        textAlign: 'center'
     }
 })
