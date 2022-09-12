@@ -24,15 +24,34 @@ const PinCodeScreen = (props: any) => {
                 </Text>
             </View>
             <View style={styles.pin_input_box}>
-                {pin.map((pin) => (
-                    <View style={styles.pinInput}>
-                        <TextInput
-                            keyboardType="numeric"
-                            style={{padding: 15}}
-                            maxLength={1}
-                        />
-                    </View>
-                ))}
+                <View style={styles.pinInput}>
+                    <TextInput
+                        keyboardType="numeric"
+                        style={{padding: 15}}
+                        maxLength={1}
+                    />
+                </View>
+                <View style={styles.pinInput}>
+                    <TextInput
+                        keyboardType="numeric"
+                        style={{padding: 15}}
+                        maxLength={1}
+                    />
+                </View>
+                <View style={styles.pinInput}>
+                    <TextInput
+                        keyboardType="numeric"
+                        style={{padding: 15}}
+                        maxLength={1}
+                    />
+                </View>
+                <View style={styles.pinInput}>
+                    <TextInput
+                        keyboardType="numeric"
+                        style={{padding: 15}}
+                        maxLength={1}
+                    />
+                </View>
             </View>
             <View style={styles.enter_pin_title_box}>
                 {!validPin && <View style={styles.error_message}>

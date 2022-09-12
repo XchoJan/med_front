@@ -31,7 +31,7 @@ const WelcomeScreen : React.FC = (props) => {
                         <CustomButton
                             title={'Зарегистрироваться'}
                             buttonStyles={{marginVertical: 15}}
-                            onPress={()=>{navigation.navigate('CreateAccount')}}
+                            onPress={()=>{navigation.navigate('EnterName')}}
                         />
                         <CustomButton
                             title={'Войти'}

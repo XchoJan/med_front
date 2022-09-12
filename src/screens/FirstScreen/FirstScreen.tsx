@@ -23,7 +23,6 @@ const FirstScreen: React.FC = (props) => {
             </View>
         );
     };
-
     return (
         <Container>
             <View>
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     skipBtnTitle:{
-        marginTop: 55,
+        marginTop: 35,
         color: color1,
         fontWeight: 'bold'
     }

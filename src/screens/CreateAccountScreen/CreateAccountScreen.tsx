@@ -14,13 +14,11 @@ const CreateAccountScreen = () => {
     function onPressFlag() {
         return false
     }
-
     return (
-
         <Container containerProp={styles.inline_container}>
             <View style={{flex: 1}}>
                 <View>
-                    <BackButton onPress={()=>{navigation.navigate("Welcome")}}/>
+                    <BackButton onPress={()=>{navigation.navigate("EnterName")}}/>
                 </View>
                 <View>
                     <Text style={styles.phoneNumber}>
@@ -64,7 +62,7 @@ const CreateAccountScreen = () => {
 export default CreateAccountScreen;
 const styles = StyleSheet.create({
     inline_container: {
-        paddingHorizontal: 15,
+        paddingHorizontal: 25,
         paddingTop: 35
     },
     phoneNumber: {
