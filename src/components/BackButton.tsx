@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Pressable} from "react-native";
+import {Text, View, StyleSheet, Pressable, Platform} from "react-native";
 import BackIcon from "../assets/Icons/BackIcon";
 import {color1} from "../helpers/colors";
 
@@ -23,7 +23,7 @@ export default BackButton;
 const styles = StyleSheet.create({
     back:{
         flexDirection: 'row',
-        marginTop: 35
+        marginTop: Platform.OS === 'android' ? 35 : 0
     },
     title:{
         color: color1,

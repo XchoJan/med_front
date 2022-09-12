@@ -4,8 +4,8 @@ import {View, StyleSheet, SafeAreaView} from "react-native";
 const Container = (props: any) => {
     const {children, containerProp} = props
     return (
-        <SafeAreaView style={[styles.container, containerProp]}>
-            <View style={{flex: 1}}>
+        <SafeAreaView style={[styles.container]}>
+            <View style={[{flex: 1}, containerProp]}>
                 {children}
             </View>
         </SafeAreaView>

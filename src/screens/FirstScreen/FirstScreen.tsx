@@ -24,7 +24,7 @@ const FirstScreen: React.FC = (props) => {
         );
     };
     return (
-        <Container>
+        <View style={styles.container}>
             <View style={{flex: 1}}>
                 <Image
                     style={styles.image}
@@ -49,13 +49,17 @@ const FirstScreen: React.FC = (props) => {
                     </View>
                 </View>
             </View>
-        </Container>
+        </View>
     );
 };
 
 export default FirstScreen;
 
 const styles = StyleSheet.create({
+    container:{
+      flex: 1,
+      width: '100%'
+    },
     image: {
         width: '100%',
     },

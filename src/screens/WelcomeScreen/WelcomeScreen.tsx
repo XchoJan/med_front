@@ -9,7 +9,7 @@ import {useNavigation} from "@react-navigation/native";
 const WelcomeScreen : React.FC = (props) => {
     const navigation: any = useNavigation();
     return (
-        <Container containerProp={styles.containerProp}>
+        <Container containerProp={styles.inlineContainer}>
             <View style={{flex: 1,}}>
                 <View style={{flex: 1, justifyContent: 'center'}}>
                     <View style={styles.logo}>
@@ -48,8 +48,10 @@ const WelcomeScreen : React.FC = (props) => {
 
 export default WelcomeScreen;
 const styles = StyleSheet.create({
-    containerProp: {
-        paddingHorizontal: 25,
+
+    inlineContainer: {
+        paddingHorizontal: 20,
+        paddingTop: 35
     },
     welcome: {
         textAlign: "center",
