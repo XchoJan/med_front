@@ -5,8 +5,8 @@ import {color1} from "../../helpers/colors/";
 const BackIcon = (props) => {
     return (
         <Svg
-            width={12}
-            height={22}
+            width={10}
+            height={18}
             viewBox="0 0 12 22"
             fill={color1}
             xmlns="http://www.w3.org/2000/svg"

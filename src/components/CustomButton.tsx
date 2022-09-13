@@ -5,7 +5,7 @@ import {color1} from "../helpers/colors";
 const CustomButton = (props: any) => {
     const {title, buttonStyles, buttonTitle, disabled, onPress} = props;
     return (
-        <TouchableOpacity disabled={disabled ? disabled : false} style={[styles.button, buttonStyles]} onPress={onPress}>
+        <TouchableOpacity activeOpacity={0.6} disabled={disabled ? disabled : false} style={[styles.button, buttonStyles]} onPress={onPress}>
             <Text style={[styles.title, buttonTitle]}>
                 {title}
             </Text>

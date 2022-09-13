@@ -7,11 +7,14 @@ import PenIcon from "../../assets/Icons/PenIcon";
 import {color1, color2} from "../../helpers/colors";
 import CustomButton from "../../components/CustomButton";
 import * as ImagePicker from 'expo-image-picker';
+import {useDispatch} from "react-redux";
+import {authData} from "../../store/actions/auth_data";
 
 const EnterNameScreen = () => {
     const navigation: any = useNavigation();
-    const [name, setName] = useState<string>('')
+    const [name, setName] = useState<string>('');
     const [image, setImage] = useState<any>(null);
+    const dispatch = useDispatch();
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -20,8 +23,6 @@ const EnterNameScreen = () => {
             aspect: [4, 3],
             quality: 1,
         });
-        console.log(result, 'result');
-
         if (!result.cancelled) {
             setImage({
                 uri: result.uri,
@@ -33,22 +34,11 @@ const EnterNameScreen = () => {
 
     function handlePostName() {
         let form = new FormData()
-        form.append('body', JSON.stringify({username: name, phone_number: '+74564865'}))
+        form.append('username', name)
         form.append('avatar', image)
+        dispatch(authData(form))
+        navigation.navigate('CreateAccount')
 
-        fetch('http://137.184.130.229/user/coach/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            body: {
-                avatar: form,
-            }
-        }).then((res) => {
-            return res.json()
-        }).then((res) => {
-            console.log(res, 'response')
-        })
     }
 
     return (
@@ -103,7 +93,7 @@ const EnterNameScreen = () => {
                 </View>
             </View>
             <View style={{marginBottom: 25}}>
-                <CustomButton onPress={()=>{navigation.navigate("CreateAccount")}} title={"Продолжить"}/>
+                <CustomButton onPress={handlePostName} title={"Продолжить"}/>
             </View>
         </Container>
     );
@@ -150,3 +140,18 @@ const styles = StyleSheet.create({
 
     }
 })
+
+// fetch('http://137.184.130.229/user/coach/', {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'multipart/form-data',
+//     },
+//     body: {
+//         // @ts-ignore
+//         avatar: form,
+//     }
+// }).then((res) => {
+//     return res.json()
+// }).then((res) => {
+//     console.log(res, 'response')
+// })

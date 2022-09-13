@@ -38,7 +38,7 @@ const FirstScreen: React.FC = (props) => {
                     activeDotStyle={{backgroundColor: color1}}
                     dotClickEnabled={false}
                 />
-                <View style={{marginBottom: 15}}>
+                <View style={{marginBottom: 35}}>
                     <Pressable style={styles.skipBtn} onPress={()=>{navigation.navigate("Welcome")}}>
                         <Text style={styles.skipBtnTitle}>
                             Пропустить

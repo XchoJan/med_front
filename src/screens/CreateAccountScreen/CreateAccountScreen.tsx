@@ -6,14 +6,25 @@ import PhoneInput from 'react-native-phone-input'
 import CustomButton from "../../components/CustomButton";
 import {color1, color2} from "../../helpers/colors";
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {authData} from "../../store/actions/auth_data";
 
 const CreateAccountScreen = () => {
+    const dispatch = useDispatch();
     const navigation: any = useNavigation();
     const [value, setValue] = useState<any>('')
 
     function onPressFlag() {
         return false
     }
+
+    let form = useSelector((store: any)=> store.auth_data.auth_data)
+
+    function handleSetPhoneNumber(){
+        navigation.navigate('PinCode')
+        dispatch(authData(value))
+    }
+
     return (
         <Container containerProp={styles.inline_container}>
             <View style={{flex: 1}}>
@@ -52,7 +63,7 @@ const CreateAccountScreen = () => {
                     disabled={value.length < 5}
                     title={'Продолжить'}
                     buttonStyles={{backgroundColor: value.length < 5 ?  '#C6B1FF' : color1}}
-                    onPress={()=>{navigation.navigate("PinCode")}}
+                    onPress={handleSetPhoneNumber}
                 />
             </View>
         </Container>
