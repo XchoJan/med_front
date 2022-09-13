@@ -10,7 +10,7 @@ const WelcomeScreen : React.FC = (props) => {
     const navigation: any = useNavigation();
     return (
         <Container containerProp={styles.inlineContainer}>
-            <View style={{flex: 1,}}>
+            <View style={{flex: 1}}>
                 <View style={{flex: 1, justifyContent: 'center'}}>
                     <View style={styles.logo}>
                         <AppLogo/>
