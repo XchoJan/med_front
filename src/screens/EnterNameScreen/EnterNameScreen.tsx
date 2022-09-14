@@ -8,7 +8,7 @@ import {color1, color2} from "../../helpers/colors";
 import CustomButton from "../../components/CustomButton";
 import * as ImagePicker from 'expo-image-picker';
 import {useDispatch} from "react-redux";
-import {authData} from "../../store/actions/auth_data";
+import {setFormData} from "../../store/actions/auth_data";
 
 const EnterNameScreen = () => {
     const navigation: any = useNavigation();
@@ -26,19 +26,20 @@ const EnterNameScreen = () => {
         if (!result.cancelled) {
             setImage({
                 uri: result.uri,
-                name: `image${Math.floor(Math.random() * 7000)}.png`,
-                type: result.type
+                name: `IMG_` + Date.now() + `.JPG`,
+                type: result.type,
+                id: Date.now(),
+                lastModified: Date.now(),
             });
         }
     };
 
-    function handlePostName() {
+    function handleSetNameAvatar() {
         let form = new FormData()
         form.append('username', name)
         form.append('avatar', image)
-        dispatch(authData(form))
+        dispatch(setFormData(form))
         navigation.navigate('CreateAccount')
-
     }
 
     return (
@@ -93,7 +94,7 @@ const EnterNameScreen = () => {
                 </View>
             </View>
             <View style={{marginBottom: 25}}>
-                <CustomButton onPress={handlePostName} title={"Продолжить"}/>
+                <CustomButton onPress={handleSetNameAvatar} title={"Продолжить"}/>
             </View>
         </Container>
     );
@@ -102,7 +103,7 @@ export default EnterNameScreen;
 const styles = StyleSheet.create({
     inlineContainer: {
         paddingHorizontal: 20,
-        paddingTop: 35
+        paddingTop: 20
     },
     title_box: {
         marginTop: 25
@@ -140,18 +141,3 @@ const styles = StyleSheet.create({
 
     }
 })
-
-// fetch('http://137.184.130.229/user/coach/', {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'multipart/form-data',
-//     },
-//     body: {
-//         // @ts-ignore
-//         avatar: form,
-//     }
-// }).then((res) => {
-//     return res.json()
-// }).then((res) => {
-//     console.log(res, 'response')
-// })

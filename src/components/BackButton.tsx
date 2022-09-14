@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     back:{
         flexDirection: 'row',
         marginTop: Platform.OS === 'android' ? 35 : 0,
-        alignItems: "center"
+        alignItems: "center",
+
     },
     title:{
         color: color1,

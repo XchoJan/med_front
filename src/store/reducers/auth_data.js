@@ -1,17 +1,18 @@
-import {AUTH_DATA} from "../actions/auth_data";
+import {SET_FORM_DATA} from "../actions/auth_data";
 
 const initialState = {
-    auth_data: [],
+    formData: [],
 }
 
 export default function reducer(state = initialState, action){
     switch (action.type){
-        case AUTH_DATA:{
-            const {auth_data} = action.payload;
-            console.log(auth_data, 'auth_data_log')
+        case SET_FORM_DATA:{
+            const {formData} = action.payload;
+            console.log(formData, 'asdasdasdasd')
+
             return {
                 ...state,
-                auth_data: [...state.auth_data, auth_data]
+                formData: formData
             }
         }
         default:{

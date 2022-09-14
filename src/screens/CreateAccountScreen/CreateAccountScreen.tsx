@@ -7,29 +7,49 @@ import CustomButton from "../../components/CustomButton";
 import {color1, color2} from "../../helpers/colors";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
-import {authData} from "../../store/actions/auth_data";
+import {setFormData} from "../../store/actions/auth_data";
+import axios from "axios";
 
 const CreateAccountScreen = () => {
     const dispatch = useDispatch();
     const navigation: any = useNavigation();
-    const [value, setValue] = useState<any>('')
+    const [value, setValue] = useState<string>('')
 
     function onPressFlag() {
         return false
     }
 
-    let form = useSelector((store: any)=> store.auth_data.auth_data)
+    let form = useSelector((store: any) => store.auth_data.formData)
 
-    function handleSetPhoneNumber(){
-        navigation.navigate('PinCode')
-        dispatch(authData(value))
+    async function handleSetPhoneNumber() {
+        form.append('phone_number', value)
+        dispatch(setFormData(form));
+        console.log(form)
+        await fetch('http://137.184.130.229/user/coach/', {
+            method: 'post',
+            body: form
+        }).then((res) => {
+            return res.json()
+        }).then((res) => {
+            console.log(res, 'response')
+            if (res.id){
+                navigation.navigate('PinCode');
+            }
+        }).catch(function (error) {
+            console.log('There has been a problem with your fetch operation: ' + error.message);
+            throw error;
+        });
     }
+
+
 
     return (
         <Container containerProp={styles.inline_container}>
             <View style={{flex: 1}}>
                 <View>
-                    <BackButton onPress={()=>{navigation.navigate("EnterName")}}/>
+                    <BackButton onPress={() => {
+                        navigation.navigate("EnterName")
+                    }}/>
                 </View>
                 <View>
                     <Text style={styles.phoneNumber}>
@@ -62,7 +82,7 @@ const CreateAccountScreen = () => {
                 <CustomButton
                     disabled={value.length < 5}
                     title={'Продолжить'}
-                    buttonStyles={{backgroundColor: value.length < 5 ?  '#C6B1FF' : color1}}
+                    buttonStyles={{backgroundColor: value.length < 5 ? '#C6B1FF' : color1}}
                     onPress={handleSetPhoneNumber}
                 />
             </View>
@@ -97,7 +117,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 15
     },
-    button_box:{
+    button_box: {
         marginBottom: 15
     }
 })
