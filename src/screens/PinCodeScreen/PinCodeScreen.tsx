@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from "react-native";
 import Container from "../../components/Container";
 import BackButton from "../../components/BackButton";
@@ -6,6 +6,11 @@ import {color2, color3} from "../../helpers/colors";
 import ErrorIcon from "../../assets/Icons/ErrorIcon";
 import {useNavigation} from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton";
+import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Title from "../../components/Title";
+import {userToken} from "../../store/actions/user_token";
 
 const PinCodeScreen = (props: any) => {
     const navigation: any = useNavigation();
@@ -17,9 +22,32 @@ const PinCodeScreen = (props: any) => {
     const [pin2, setPin2] = useState('')
     const [pin3, setPin3] = useState('')
     const [pin4, setPin4] = useState('')
-
     const pin = pin1 + pin2 + pin3 + pin4
-    console.log(pin);
+    const dispatch = useDispatch();
+
+    let form = useSelector((store: any) => store.auth_data.formData)
+
+    async function handleSendPin() {
+        const pinForm = new FormData()
+        pinForm.append('phone_number', form._parts[2][1])
+        pinForm.append('password', pin)
+        console.log(pinForm)
+        try {
+            const response = await axios.post('http://137.184.130.229/user/token/', pinForm, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            })
+            console.log(response, 'rrr')
+            setValidPin(true)
+         // dispatch(userToken(response.data.access))
+            await AsyncStorage.setItem('userToken', response.data.access)
+        } catch (error) {
+            setValidPin(false)
+            console.log(error)
+        }
+    }
+
     return (
         <Container containerProp={styles.inlineContainer}>
             <View>
@@ -28,9 +56,9 @@ const PinCodeScreen = (props: any) => {
                 }}/>
             </View>
             <View style={styles.number_box}>
-                <Text style={styles.number}>
+                <Title>
                     + 7 921 748 99 82
-                </Text>
+                </Title>
             </View>
             <View style={styles.pin_input_box}>
                 <View style={styles.pinInput}>
@@ -40,7 +68,7 @@ const PinCodeScreen = (props: any) => {
                         maxLength={1}
                         onChangeText={(pin1: any) => {
                             setPin1(pin1)
-                            if (pin1 != ''){
+                            if (pin1 != '') {
                                 // @ts-ignore
                                 pin2Ref.current.focus()
                             }
@@ -55,7 +83,7 @@ const PinCodeScreen = (props: any) => {
                         ref={pin2Ref}
                         onChangeText={(pin2: any) => {
                             setPin2(pin2)
-                            if (pin2 != ''){
+                            if (pin2 != '') {
                                 // @ts-ignore
                                 pin3Ref.current.focus()
                             }
@@ -67,10 +95,10 @@ const PinCodeScreen = (props: any) => {
                         keyboardType="numeric"
                         style={styles.input}
                         maxLength={1}
-                         ref={pin3Ref}
+                        ref={pin3Ref}
                         onChangeText={(pin3: any) => {
                             setPin3(pin3)
-                            if (pin3 != ''){
+                            if (pin3 != '') {
                                 // @ts-ignore
                                 pin4Ref.current.focus()
                             }
@@ -82,7 +110,7 @@ const PinCodeScreen = (props: any) => {
                         keyboardType="numeric"
                         style={styles.input}
                         maxLength={1}
-                         ref={pin4Ref}
+                        ref={pin4Ref}
                         onChangeText={(pin4: any) => {
                             setPin4(pin4)
                         }}
@@ -104,9 +132,7 @@ const PinCodeScreen = (props: any) => {
                 </Text>
             </View>
             <View style={{marginBottom: 25}}>
-                <CustomButton onPress={() => {
-                    navigation.navigate("Greetings")
-                }} title={'Продолжить'}/>
+                <CustomButton onPress={handleSendPin} title={'Продолжить'}/>
             </View>
         </Container>
     );
@@ -124,14 +150,11 @@ const styles = StyleSheet.create({
     number_box: {
         marginTop: 30
     },
-    number: {
-        fontSize: 24,
-        fontWeight: "bold"
-    },
     pin_input_box: {
         flexDirection: 'row',
         justifyContent: "space-around",
-        marginTop: 20
+        marginTop: 20,
+        left: -10
     },
     pinInput: {
         width: '20%',
@@ -154,7 +177,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginVertical: 5
     },
-    input:{
+    input: {
         padding: 15,
         textAlign: 'center'
     }

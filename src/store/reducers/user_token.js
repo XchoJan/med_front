@@ -1,17 +1,16 @@
-import {SET_FORM_DATA} from "../actions/auth_data";
-
+import {USER_TOKEN} from "../actions/user_token";
 const initialState = {
-    formData: [],
+    user_token: '',
 }
 
 export default function reducer(state = initialState, action){
     switch (action.type){
-        case SET_FORM_DATA:{
-            const {formData} = action.payload;
-            console.log(formData, 'asdasdasdasd')
+        case USER_TOKEN:{
+            const {user_token} = action.payload;
+            console.log(user_token, '3333')
             return {
                 ...state,
-                formData: formData
+                user_token: user_token
             }
         }
         default:{

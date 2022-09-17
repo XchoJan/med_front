@@ -5,6 +5,7 @@ import BackButton from "../../components/BackButton";
 import DoctorBooks from "../../assets/Icons/DoctorBooks";
 import CustomButton from "../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
+import Title from "../../components/Title";
 
 const GreetingsScreen2 = () => {
     const navigation: any = useNavigation();
@@ -14,9 +15,9 @@ const GreetingsScreen2 = () => {
                <BackButton onPress={()=>{navigation.navigate('Greetings')}}/>
            </View>
             <View style={styles.title_box}>
-                <Text style={styles.title}>
-                    Мы вас нашли в списке{"\n"}верифицированных в бадди
-                </Text>
+                <Title>
+                    Мы желаем вам легкой{"\n"}адаптации в компании
+                </Title>
                 <Text style={{marginTop: 15}}>
                     Давай договорился задавать вопросы и быть открытыми.{"\n"}
                     {"\n"}
@@ -41,10 +42,6 @@ const styles = StyleSheet.create({
     },
     title_box: {
         marginTop: 25
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold"
     },
     image_box:{
         alignItems: "center",

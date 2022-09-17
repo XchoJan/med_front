@@ -4,6 +4,7 @@ import BackButton from "../../components/BackButton";
 import {View, Text, StyleSheet} from "react-native";
 import CustomButton from "../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
+import Title from "../../components/Title";
 
 const GreetingsScreen3 = () => {
     const navigation: any = useNavigation();
@@ -13,9 +14,9 @@ const GreetingsScreen3 = () => {
                 <BackButton onPress={()=>{navigation.navigate('Greetings2')}}/>
             </View>
             <View style={{marginTop: 25}}>
-                <Text style={styles.title}>
+                <Title>
                     Ваш план на ближайшую неделю:
-                </Text>
+                </Title>
                 <Text>
                     -Знакомство с продуктом{"\n"}
                     {"\n"}
@@ -25,9 +26,9 @@ const GreetingsScreen3 = () => {
                 </Text>
             </View>
             <View>
-                <Text style={styles.title}>
+                <Title titlePropStyle={{fontSize: 20}}>
                     Пройти путь клиента:
-                </Text>
+                </Title>
                 <Text>
                     - Первичный контакт с клиентом -видео + тестовое задание{"\n"}
                     {"\n"}
@@ -37,9 +38,9 @@ const GreetingsScreen3 = () => {
                 </Text>
             </View>
             <View style={{flex: 1}}>
-                <Text style={styles.title}>
+                <Title titlePropStyle={{fontSize: 20}}>
                     Cозвон с клиентом:
-                </Text>
+                </Title>
                 <Text>
                     -Коучинговые методики: мастермаинд с коллегами и тьютором (тестовое задание){"\n"}
                     {"\n"}
@@ -59,9 +60,5 @@ const styles = StyleSheet.create({
     inlineContainer: {
         paddingHorizontal: 20,
         paddingTop: 35
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold"
     },
 })

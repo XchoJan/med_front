@@ -6,6 +6,7 @@ import DoctorComputer from "../../assets/Icons/DoctorComputer";
 import CustomButton from "../../components/CustomButton";
 import {color1} from "../../helpers/colors";
 import {useNavigation} from "@react-navigation/native";
+import Title from "../../components/Title";
 
 const GreetingsScreen7 = () => {
     const navigation: any = useNavigation();
@@ -17,9 +18,9 @@ const GreetingsScreen7 = () => {
                     <BackButton onPress={()=>{navigation.navigate('Greetings6')}}/>
                 </View>
                 <View>
-                    <Text style={styles.title_h3}>
+                    <Title titlePropStyle={{marginVertical: 15}}>
                         Перейдите к тестовой{"\n"}консультации
-                    </Text>
+                    </Title>
                     <Text>
                         Тестовый звонок с “таинственным{"\n"}клиентом” от Health Buddy
                     </Text>
@@ -41,11 +42,6 @@ const styles = StyleSheet.create({
     inlineContainer: {
         paddingHorizontal: 20,
         paddingTop: 35
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold",
-        marginVertical: 15
     },
     title_h3: {
         fontWeight: "bold",

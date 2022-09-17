@@ -6,12 +6,11 @@ import PhoneInput from 'react-native-phone-input'
 import CustomButton from "../../components/CustomButton";
 import {color1, color2} from "../../helpers/colors";
 import {useNavigation} from "@react-navigation/native";
-import {useDispatch, useSelector} from "react-redux";
-import {setFormData} from "../../store/actions/auth_data";
+import {useSelector} from "react-redux";
 import axios from "axios";
+import Title from "../../components/Title";
 
 const CreateAccountScreen = () => {
-    const dispatch = useDispatch();
     const navigation: any = useNavigation();
     const [value, setValue] = useState<string>('')
 
@@ -22,28 +21,36 @@ const CreateAccountScreen = () => {
     let form = useSelector((store: any) => store.auth_data.formData)
 
     async function handleSetPhoneNumber() {
-        form.append('phone_number', value)
-        dispatch(setFormData(form));
-        console.log(form)
-        await fetch('http://137.184.130.229/user/coach/', {
-            method: 'post',
-            body: form
-        }).then((res) => {
-            return res.json()
-        }).then((res) => {
-            console.log(res, 'response')
-            if (res.id){
-                navigation.navigate('PinCode');
+        let phoneForm = new FormData;
+        phoneForm.append('phone_number', value);
+        form.append('phone_number', value);
+
+        try {
+            const response = await axios.post('http://137.184.130.229/user/coach/', form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            })
+            console.log(response.data, '4444')
+        } catch (error) {
+            console.log(error)
+        }
+        try {
+            const response1 = await axios.post('http://137.184.130.229/user/send_pin/', phoneForm, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            })
+            console.log(response1, 'sended-pin')
+            if (response1.status === 200){
+                navigation.navigate('PinCode')
             }
-        }).catch(function (error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);
-            throw error;
-        });
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-
-
-    return (
+     return (
         <Container containerProp={styles.inline_container}>
             <View style={{flex: 1}}>
                 <View>
@@ -52,9 +59,9 @@ const CreateAccountScreen = () => {
                     }}/>
                 </View>
                 <View>
-                    <Text style={styles.phoneNumber}>
+                    <Title titlePropStyle={{marginTop: 25}}>
                         Введите свой телефон
-                    </Text>
+                    </Title>
                     <Text style={styles.new_number}>
                         Новый номер
                     </Text>
@@ -96,11 +103,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         paddingTop: 35
     },
-    phoneNumber: {
-        fontWeight: "bold",
-        marginTop: 25,
-        fontSize: 22
-    },
     new_number: {
         color: '#BCBCBC',
         paddingTop: 10,
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
     phone_input: {
         backgroundColor: color2,
         padding: 15,
-        borderRadius: 15
+        borderRadius: 30
     },
     button_box: {
         marginBottom: 15

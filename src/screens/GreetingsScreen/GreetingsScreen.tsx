@@ -1,26 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import Container from "../../components/Container";
 import BackButton from "../../components/BackButton";
 import {useNavigation} from "@react-navigation/native";
 import Doctor from "../../assets/Icons/Doctor";
 import CustomButton from "../../components/CustomButton";
+import Title from "../../components/Title";
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GreetingsScreen = (props: any) => {
+    const dispatch = useDispatch()
     const navigation: any = useNavigation();
+    let user_data = useSelector((store: any) => store.user_data?.user_data)
+    console.log(user_data)
     return (
         <Container containerProp={styles.inlineContainer}>
             <View>
                 <BackButton onPress={() => {
-                    navigation.navigate('CreateAccount')
+                    AsyncStorage.removeItem('userToken').then(r => console.log(r))
                 }}/>
             </View>
             <View style={styles.title_box}>
-                <Text style={styles.title}>
-                    Мы вас нашли в списке{"\n"}верифицированных в бадди
-                </Text>
+                <Title>
+                    Здравствуйте, {user_data?.user?.username} !
+                </Title>
                 <Text style={{marginTop: 15}}>
-                    Здравствуйте, Мещерякова Анна{"\n"}Владимеровна !
+                    Мы вас нашли в списке верифицированных в бадди.
                 </Text>
             </View>
             <View style={styles.image_box}>
@@ -41,10 +47,6 @@ const styles = StyleSheet.create({
     },
     title_box: {
         marginTop: 25
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold"
     },
     image_box:{
         alignItems: "center",

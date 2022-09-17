@@ -9,6 +9,7 @@ import CustomButton from "../../components/CustomButton";
 import * as ImagePicker from 'expo-image-picker';
 import {useDispatch} from "react-redux";
 import {setFormData} from "../../store/actions/auth_data";
+import Title from "../../components/Title";
 
 const EnterNameScreen = () => {
     const navigation: any = useNavigation();
@@ -27,7 +28,7 @@ const EnterNameScreen = () => {
             setImage({
                 uri: result.uri,
                 name: `IMG_` + Date.now() + `.JPG`,
-                type: result.type,
+                type: result.type + '/jpeg',
                 id: Date.now(),
                 lastModified: Date.now(),
             });
@@ -52,9 +53,9 @@ const EnterNameScreen = () => {
                 </View>
                 <View style={styles.top_box}>
                     <View>
-                        <Text style={styles.title}>
+                        <Title>
                             Добро пожаловать !
-                        </Text>
+                        </Title>
                     </View>
                     <View style={{position: 'relative'}}>
                         <TouchableOpacity onPress={pickImage} style={styles.edit_icon}>
@@ -78,9 +79,9 @@ const EnterNameScreen = () => {
                     </View>
                     <View style={styles.input_box}>
                         <View>
-                            <Text style={[styles.title]}>
+                            <Title>
                                 Введите ваше имя
-                            </Text>
+                            </Title>
                         </View>
                         <View style={styles.input}>
                             <TextInput

@@ -6,6 +6,7 @@ import {Video} from 'expo-av';
 import {color2} from "../../helpers/colors";
 import CustomButton from "../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
+import Title from "../../components/Title";
 
 const GreetingsScreen4 = (props: any) => {
     const navigation: any = useNavigation();
@@ -20,21 +21,21 @@ const GreetingsScreen4 = (props: any) => {
                 </View>
                 <View>
                     <View style={styles.title_box}>
-                        <Text style={styles.title}>
+                        <Title>
                             Приветствуем тебя в{"\n"}команде Health Buddy
-                        </Text>
-                        <Text style={styles.tutorial}>
+                        </Title>
+                        <Title titlePropStyle={{fontSize: 20}}>
                             План обучения:
-                        </Text>
+                        </Title>
                         <Text style={{marginTop: 15}}>
                             Что такое Health Buddy — сегодня ты познакомишься с компанией и увидишь работу
                             изнутри;{"\n"}
                             {"\n"}
                             Мы-сервис наставников для раскрытия потенциала здоровья всех возрастов;
                         </Text>
-                        <Text style={styles.tutorial}>
+                        <Title titlePropStyle={{fontSize: 20}}>
                             Задание
-                        </Text>
+                        </Title>
                         <Text style={{marginTop: 10}}>
                             посмотри краткое видео о продукте, чтобы ближе познакомиться с сервисом
                         </Text>
@@ -51,12 +52,16 @@ const GreetingsScreen4 = (props: any) => {
                         />
                     </View>
                     <View>
-                        <Text style={styles.tutorial}>
+                        <Title titlePropStyle={{fontSize: 20}}>
                             Напиши пять тезисов , которые{"\n"}отличают нас от конкурентов
-                        </Text>
+                        </Title>
                     </View>
                     <View style={styles.input_box}>
-                        <TextInput placeholder={"Написать"} style={styles.input}/>
+                        <TextInput
+                            placeholder={"Написать"}
+                            style={styles.input}
+                            multiline={true}
+                        />
                     </View>
                     <View style={styles.button_box}>
                         <CustomButton onPress={()=>{navigation.navigate('Greetings5')}} title={"Продолжить"}/>
@@ -76,10 +81,6 @@ const styles = StyleSheet.create({
     title_box: {
         marginTop: 25
     },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold"
-    },
     tutorial: {
         fontWeight: 'bold',
         fontSize: 16,
@@ -95,11 +96,15 @@ const styles = StyleSheet.create({
     },
     input_box:{
         backgroundColor: color2,
-        height: 200,
+        maxHeight: 200,
         borderRadius: 10,
-        padding: 15
+        padding: 15,
+        marginVertical: 15
     },
-    input:{},
+    input:{
+        maxHeight: '100%',
+
+    },
     button_box:{
         marginTop: 25,
         marginBottom: 40

@@ -6,6 +6,7 @@ import {useNavigation} from "@react-navigation/native";
 import {Video} from "expo-av";
 import {color2} from "../../helpers/colors";
 import CustomButton from "../../components/CustomButton";
+import Title from "../../components/Title";
 
 const GreetingsScreen6 = () => {
     const navigation: any = useNavigation();
@@ -20,9 +21,9 @@ const GreetingsScreen6 = () => {
                     }}/>
                 </View>
                 <View>
-                    <Text style={styles.title_h3}>
+                    <Title>
                         Теперь переходим к знакомству с клиентом
-                    </Text>
+                    </Title>
                     <Text>
                         Видео о пути клиента от старшего сервис-менеджера Александрой Щербаковой
                     </Text>
@@ -40,9 +41,9 @@ const GreetingsScreen6 = () => {
                 </View>
                 <View style={{marginBottom: 210}}>
                     <View>
-                        <Text style={styles.title_h3}>
+                        <Title titlePropStyle={{marginTop: 15, marginBottom: 10}}>
                             Задание
-                        </Text>
+                        </Title>
                         <Text>
                             выписать чек-лист первичной консультации (основные пункты для коммуникации с клиентом)
                         </Text>
@@ -67,17 +68,6 @@ const styles = StyleSheet.create({
     inlineContainer: {
         paddingHorizontal: 20,
         paddingTop: 35
-    },
-    title: {
-        fontSize: 25,
-        fontWeight: "bold",
-        marginVertical: 15
-    },
-    title_h3: {
-        fontWeight: "bold",
-        fontSize: 18,
-        marginTop: 15,
-        marginBottom: 10
     },
     video_box: {
         borderRadius: 10
