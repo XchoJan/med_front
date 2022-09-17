@@ -38,6 +38,7 @@ const EnterNameScreen = () => {
     function handleSetNameAvatar() {
         let form = new FormData()
         form.append('username', name)
+        console.log({image})
         form.append('avatar', image)
         dispatch(setFormData(form))
         navigation.navigate('CreateAccount')

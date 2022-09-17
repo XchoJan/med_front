@@ -8,18 +8,23 @@ import CustomButton from "../../components/CustomButton";
 import Title from "../../components/Title";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {deleteUserToken} from "../../store/actions/user_token";
 
 const GreetingsScreen = (props: any) => {
     const dispatch = useDispatch()
     const navigation: any = useNavigation();
     let user_data = useSelector((store: any) => store.user_data?.user_data)
     console.log(user_data)
+
+    const logout = async () => {
+      await AsyncStorage.removeItem('userToken');
+      dispatch(deleteUserToken());
+    }
+
     return (
         <Container containerProp={styles.inlineContainer}>
             <View>
-                <BackButton onPress={() => {
-                    AsyncStorage.removeItem('userToken').then(r => console.log(r))
-                }}/>
+                <BackButton onPress={logout}/>
             </View>
             <View style={styles.title_box}>
                 <Title>

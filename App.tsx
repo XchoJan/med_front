@@ -9,7 +9,7 @@ import {useEffect, useState} from "react";
 import CoachVerify from "./src/navigations/CoachVerifyNavigations";
 import axios from "axios";
 import {setUserData} from "./src/store/actions/user_data";
-import {userToken} from "./src/store/actions/user_token";
+import {setUserToken} from "./src/store/actions/user_token";
 
 const AppWrapper = () => {
     return (
@@ -20,32 +20,36 @@ const AppWrapper = () => {
 };
 
 const App = () => {
-    let [userToken, setUserToken] = useState<any>(null)
-    let isLogined = useSelector((store: any) => store.is_logged.is_logged);
-    let Token = useSelector((store: any) => store.user_token);
-    let AuthStr = 'Bearer ' + userToken;
-    console.log(Token, 'Token')
+    let [token, setToken] = useState<any>(null)
+    let tokenFromReducer = useSelector((store: any) => store.user_token.user_token);
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        AsyncStorage.getItem('userToken').then(r => dispatch(userToken(r)))
+        (async () => {
+            const tokenFromAsyncStorage = await AsyncStorage.getItem('userToken');
+            if (tokenFromAsyncStorage) {
+                setToken(tokenFromAsyncStorage);
+                dispatch(setUserToken(tokenFromAsyncStorage));
+            }
+        })()
     },[])
 
     useEffect(() => {
-        axios.get('http://137.184.130.229/user/me/', {
-            headers: {
-                'Authorization': AuthStr,
-            },
-        }).then((res) => {
-            console.log(res.data, 'eee')
-            dispatch(setUserData(res.data))
-        })
-    }, [userToken])
-    console.log(Token, 2222)
+        if (token) {
+            axios.get('http://137.184.130.229/user/me/', {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                },
+            }).then((res) => {
+                console.log(res.data, 'eee')
+                dispatch(setUserData(res.data))
+            })
+        }
+    }, [token])
 
     return (
         <NavigationContainer>
-            {!userToken ?
+            {!tokenFromReducer ?
                 <Coach/>
                  :
                 <CoachVerify/>

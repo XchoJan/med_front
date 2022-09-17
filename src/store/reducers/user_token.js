@@ -1,4 +1,4 @@
-import {USER_TOKEN} from "../actions/user_token";
+import {DELETE_TOKEN, USER_TOKEN} from "../actions/user_token";
 const initialState = {
     user_token: '',
 }
@@ -11,6 +11,12 @@ export default function reducer(state = initialState, action){
             return {
                 ...state,
                 user_token: user_token
+            }
+        }
+        case DELETE_TOKEN:{
+            return {
+                ...state,
+                user_token: ''
             }
         }
         default:{
