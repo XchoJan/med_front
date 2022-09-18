@@ -11,17 +11,23 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import Delete from "../../assets/Icons/Delete";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ErrorPopUp from "../../components/ErrorPopUp";
 
 const GreetingsScreen5 = () => {
     const navigation: any = useNavigation();
-    const [education, setEducation] = useState<any>()
-    const [resume, setResume] = useState<any>()
-    const [photo, setPhoto] = useState<any>()
+    const [education, setEducation] = useState<any>('')
+    const [resume, setResume] = useState<any>('')
+    const [photo, setPhoto] = useState<any>('')
     const [bio, setBio] = useState<any>('')
     const [theses, setTheses] = useState<any>('')
     let [userToken, setUserToken] = useState<any>(null)
+    const [valid, setValid] = useState(true)
 
-    let form = useSelector((store: any) => store.auth_data.formData)
+    const [educationValid, setEducationValid] = useState(true)
+    const [resumeValid, setResumeValid] = useState(true)
+    const [photoValid, setPhotoValid] = useState(true)
+    const [checkBio, setCheckBio] = useState(true)
+    const [thesesValid, setThesesValid] = useState(true)
 
     useEffect(() => {
         AsyncStorage.getItem('userToken').then(r => setUserToken(r))
@@ -80,15 +86,52 @@ const GreetingsScreen5 = () => {
         }
     }
 
+    // @ts-ignore
+
+
     async function handlePostInfo() {
         let AuthStr = 'Bearer ' + userToken;
-
         const dataForm = new FormData()
         dataForm.append('bio', bio)
         dataForm.append('resume', resume)
         dataForm.append('education', education)
         dataForm.append('photo', photo)
         dataForm.append('theses', theses)
+
+        if (!resume || !education || !photo || !bio || !theses) {
+            if (!resume) {
+                setResumeValid(false)
+                setValid(false)
+            } else {
+                setResumeValid(true)
+            }
+            if (!education) {
+                setEducationValid(false)
+                setValid(false)
+            } else {
+                setEducationValid(true)
+            }
+            if (!photo) {
+                setPhotoValid(false)
+                setValid(false)
+            } else {
+                setPhotoValid(true)
+                setValid(false)
+            }
+            if (!bio) {
+                setCheckBio(false)
+                setValid(false)
+            } else {
+                setCheckBio(true)
+            }
+            if (!theses) {
+                setThesesValid(false)
+                setValid(false)
+            } else {
+                setThesesValid(true)
+            }
+            return false
+        }
 
         try {
             const response = await axios.put('http://137.184.130.229/user/coach/update_me/', dataForm, {
@@ -97,13 +140,19 @@ const GreetingsScreen5 = () => {
                     'Content-Type': 'multipart/form-data'
                 },
             })
-            console.log(response)
+            setValid(true)
+            setCheckBio(true)
+            setThesesValid(true)
+            setPhotoValid(true)
+            setEducationValid(true)
+            setResumeValid(true)
+            console.log(response, 'sended-all')
         } catch (error) {
             console.log(error)
         }
+        console.log(333333333333333333)
     }
 
-    console.log(userToken, 222)
     return (
         <Container containerProp={styles.inlineContainer}>
             <View style={{marginBottom: 15}}>
@@ -113,6 +162,10 @@ const GreetingsScreen5 = () => {
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{marginTop: 15}}>
+                    {!valid
+                        &&
+                        <ErrorPopUp error={'Необходимо заполнить все поля'}/>
+                    }
                     <Title titlePropStyle={{marginVertical: 15}}>
                         Зарегистрируй профиль наставника
                     </Title>
@@ -125,17 +178,18 @@ const GreetingsScreen5 = () => {
                         Краткое БИО о себе
                     </Title>
                 </View>
-                <View style={[styles.input_box, bio && {borderColor: color1}]}>
+                <View style={[styles.input_box, bio && {borderColor: color1}, !checkBio && {borderColor: 'red'}]}>
                     <TextInput
                         style={{width: '80%'}}
                         value={bio}
                         onChangeText={setBio}
                         placeholder={'Написать'}
+                        multiline={true}
                     />
 
                     {bio && <TouchableOpacity
                         activeOpacity={0.4}
-                        style={{marginTop: 5}}
+                        style={{marginTop: 5, right: 10}}
                         onPress={() => {
                             setBio('')
                         }}>
@@ -154,7 +208,7 @@ const GreetingsScreen5 = () => {
                         <View style={styles.button_box}>
                             <CustomButton
                                 buttonTitle={{color: '#7454CF'}}
-                                buttonStyles={styles.custom_button_styles}
+                                buttonStyles={[styles.custom_button_styles, !educationValid && {borderColor: 'red'}]}
                                 title={education?.name ? education?.name : 'Загрузить файл'}
                                 onPress={pickEducation}
                             />
@@ -171,7 +225,7 @@ const GreetingsScreen5 = () => {
                         <View style={styles.button_box}>
                             <CustomButton
                                 buttonTitle={{color: '#7454CF'}}
-                                buttonStyles={styles.custom_button_styles}
+                                buttonStyles={[styles.custom_button_styles, !resumeValid && {borderColor: 'red'}]}
                                 title={resume?.name ? resume?.name : 'Загрузить файл'}
                                 onPress={pickResume}
                             />
@@ -188,7 +242,7 @@ const GreetingsScreen5 = () => {
                         <View style={styles.button_box}>
                             <CustomButton
                                 buttonTitle={{color: '#7454CF'}}
-                                buttonStyles={styles.custom_button_styles}
+                                buttonStyles={[styles.custom_button_styles, !photoValid && {borderColor: 'red'}]}
                                 title={photo?.name ? photo?.name : 'Загрузить файл'}
                                 onPress={pickPhoto}
                             />
@@ -199,7 +253,7 @@ const GreetingsScreen5 = () => {
                     <Title titlePropStyle={{fontSize: 20, marginVertical: 12}}>
                         Напиши пять тезисов , которые отличают нас от конкурентов
                     </Title>
-                    <View style={styles.input_box}>
+                    <View style={[styles.input_box, !thesesValid && {borderColor: 'red'}]}>
                         <TextInput
                             onChangeText={setTheses}
                             multiline={true}
@@ -211,7 +265,7 @@ const GreetingsScreen5 = () => {
                 </View>
                 <View style={{marginVertical: 25}}>
                     <CustomButton
-                        buttonStyles={{backgroundColor: '#7454CF'}}
+                        buttonStyles={[styles.btnBgc, !valid ? {backgroundColor: color1} : {backgroundColor: '#7454CF'}]}
                         onPress={handlePostInfo}
                         title={"Продолжить"}
                     />
@@ -236,14 +290,14 @@ const styles = StyleSheet.create({
     },
     input_box: {
         backgroundColor: color2,
-        padding: 10,
+        padding: 12,
         marginBottom: 15,
         borderRadius: 30,
         maxHeight: 300,
         borderWidth: 2,
-        borderColor: 'white',
         flexDirection: 'row',
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        borderColor: 'transparent'
     },
     button_box: {
         marginVertical: 15
@@ -253,5 +307,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: color1,
         borderRadius: 30
+    },
+    btnBgc: {
+        backgroundColor: '#7454CF'
     }
 })

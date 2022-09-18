@@ -10,7 +10,7 @@ import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Title from "../../components/Title";
-import {setUserToken, userToken} from "../../store/actions/user_token";
+import {setUserToken} from "../../store/actions/user_token";
 
 const PinCodeScreen = (props: any) => {
     const navigation: any = useNavigation();

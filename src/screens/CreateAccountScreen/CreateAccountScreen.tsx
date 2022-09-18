@@ -76,7 +76,6 @@ const CreateAccountScreen = () => {
                         textProps={{
                             placeholder: '_ _ _  _ _ _  _ _ _'
                         }}
-
                     />
                 </View>
                 <View>

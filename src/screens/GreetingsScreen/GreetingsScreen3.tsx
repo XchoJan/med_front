@@ -14,7 +14,7 @@ const GreetingsScreen3 = () => {
                 <BackButton onPress={()=>{navigation.navigate('Greetings2')}}/>
             </View>
             <View style={{marginTop: 25}}>
-                <Title>
+                <Title titlePropStyle={{marginBottom: 5}}>
                     Ваш план на ближайшую неделю:
                 </Title>
                 <Text>
@@ -26,7 +26,7 @@ const GreetingsScreen3 = () => {
                 </Text>
             </View>
             <View>
-                <Title titlePropStyle={{fontSize: 20}}>
+                <Title titlePropStyle={{fontSize: 20, marginTop: 15, marginBottom: 5}}>
                     Пройти путь клиента:
                 </Title>
                 <Text>

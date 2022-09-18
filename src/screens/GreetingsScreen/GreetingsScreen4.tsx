@@ -15,10 +15,10 @@ const GreetingsScreen4 = (props: any) => {
 
     return (
         <Container containerProp={styles.inlineContainer}>
+            <View style={{marginBottom: 10}}>
+                <BackButton  onPress={()=>{navigation.navigate('Greetings3')}}/>
+            </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
-                    <BackButton  onPress={()=>{navigation.navigate('Greetings3')}}/>
-                </View>
                 <View>
                     <View style={styles.title_box}>
                         <Title>

@@ -7,7 +7,6 @@ let Tab = createBottomTabNavigator();
 import {
     HomeScreen
 } from "../screens/MainScreens";
-import {FirstScreen} from "../screens";
 
 function Home() {
     return <HomeScreen/>

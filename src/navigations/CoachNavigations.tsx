@@ -9,13 +9,8 @@ import {
     CreateAccountScreen,
     PinCodeScreen,
     EnterNameScreen,
-    GreetingsScreen,
-    GreetingsScreen2,
-    GreetingsScreen3,
-    GreetingsScreen4,
-    GreetingsScreen5,
-    GreetingsScreen6,
-    GreetingsScreen7,
+    LoginScreen,
+    LoginPinScreen
 } from '../screens'
 
 function First() {
@@ -33,6 +28,14 @@ function CreateAccount() {
 }
 function PinCode() {
     return <PinCodeScreen/>
+}
+
+function Login() {
+    return <LoginScreen/>
+}
+function LoginPin({ route, navigation }: any) {
+    const {phone_number} = route?.params
+    return <LoginPinScreen phone_number={phone_number}/>
 }
 
 export default function Coach() {
@@ -69,6 +72,18 @@ export default function Coach() {
             />
 
             <Tab.Screen name='PinCode' component={PinCode}
+                        options={({route}) => ({
+                            tabBarButton: () => null,
+                            tabBarStyle: {display: 'none'},
+                        })}
+            />
+            <Tab.Screen name='Login' component={Login}
+                        options={({route}) => ({
+                            tabBarButton: () => null,
+                            tabBarStyle: {display: 'none'},
+                        })}
+            />
+            <Tab.Screen name='LoginPin' component={LoginPin}
                         options={({route}) => ({
                             tabBarButton: () => null,
                             tabBarStyle: {display: 'none'},

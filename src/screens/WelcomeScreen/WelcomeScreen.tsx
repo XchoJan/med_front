@@ -37,6 +37,7 @@ const WelcomeScreen : React.FC = (props) => {
                             title={'Войти'}
                             buttonStyles={styles.loginBtn}
                             buttonTitle={{color: color1}}
+                            onPress={()=>{navigation.navigate('Login')}}
                         />
                     </View>
                 </View>

@@ -23,6 +23,7 @@ const FirstScreen: React.FC = (props) => {
             </View>
         );
     };
+
     return (
         <View style={styles.container}>
             <View style={{flex: 1}}>
