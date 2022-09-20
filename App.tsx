@@ -59,6 +59,7 @@ const App = () => {
         setBio(bioFromReducer)
     }, [bioFromReducer])
 
+    console.log({bio, bioFromReducer})
     return (
         <NavigationContainer>
             {!tokenFromReducer ?
