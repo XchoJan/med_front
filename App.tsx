@@ -22,7 +22,6 @@ const AppWrapper = () => {
 };
 
 const App = () => {
-    let [token, setToken] = useState<any>(null)
     let [bio, setBio] = useState<any>('')
     let tokenFromReducer = useSelector((store: any) => store.user_token.user_token);
     let bioFromReducer = useSelector((store: any) => store.user_token.user_bio);
@@ -33,27 +32,28 @@ const App = () => {
         (async () => {
             const tokenFromAsyncStorage = await AsyncStorage.getItem('userToken');
             if (tokenFromAsyncStorage) {
-                setToken(tokenFromAsyncStorage);
                 dispatch(setUserToken(tokenFromAsyncStorage));
             }
         })()
     },[])
 
     useEffect(() => {
-        if (token) {
+        if (tokenFromReducer) {
             axios.get(baseUrl +'/me/', {
                 headers: {
-                    'Authorization': 'Bearer ' + token,
+                    'Authorization': 'Bearer ' + tokenFromReducer,
                 },
             }).then((res) => {
                 console.log(res.data, 'eee')
-               if (res.data.bio){
+                dispatch(setUserData(res.data))
+                if (res.data.bio){
                    setBio(res.data.bio)
                }
-                dispatch(setUserData(res.data))
+            }).catch(e => {
+                console.log(e.message, 'error while getting my profile')
             })
         }
-    }, [token])
+    }, [tokenFromReducer])
 
     useEffect(() => {
         setBio(bioFromReducer)

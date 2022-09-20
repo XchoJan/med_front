@@ -8,17 +8,19 @@ import BellIcon from "../../../assets/Icons/BellIcon";
 import Title from "../../../components/Title";
 import CustomButton from "../../../components/CustomButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {deleteUserToken} from "../../../store/actions/user_token";
+import {deleteUserBio, deleteUserToken} from "../../../store/actions/user_token";
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
     const navigation: any = useNavigation();
     let user_data = useSelector((store: any) => store.user_data?.user_data)
-    console.log(user_data)
+    console.log(user_data, 'from home screen')
+
 
     const logout = async () => {
         await AsyncStorage.removeItem('userToken');
         dispatch(deleteUserToken());
+        dispatch(deleteUserBio());
     }
     return (
         <MainContainer>
