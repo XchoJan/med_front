@@ -23,7 +23,9 @@ const AppWrapper = () => {
 
 const App = () => {
     let [token, setToken] = useState<any>(null)
+    let [bio, setBio] = useState<any>('')
     let tokenFromReducer = useSelector((store: any) => store.user_token.user_token);
+    let bioFromReducer = useSelector((store: any) => store.user_token.user_bio);
     let [verifiedUser, setVerifiedUser] = useState(false)
     const dispatch = useDispatch()
 
@@ -46,19 +48,23 @@ const App = () => {
             }).then((res) => {
                 console.log(res.data, 'eee')
                if (res.data.bio){
-                   setVerifiedUser(true)
+                   setBio(res.data.bio)
                }
                 dispatch(setUserData(res.data))
             })
         }
     }, [token])
 
+    useEffect(() => {
+        setBio(bioFromReducer)
+    }, [bioFromReducer])
+
     return (
         <NavigationContainer>
             {!tokenFromReducer ?
                 <Coach/>
                  :
-                <CoachVerify/>
+                !bio ? <CoachVerify/> : <Main />
             }
         </NavigationContainer>
     )

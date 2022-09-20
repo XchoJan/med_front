@@ -7,12 +7,13 @@ import CustomButton from "../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
 import Title from "../../components/Title";
 import * as ImagePicker from "expo-image-picker";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import Delete from "../../assets/Icons/Delete";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ErrorPopUp from "../../components/ErrorPopUp";
 import {baseUrl} from "../../helpers/url";
+import {setUserBio} from "../../store/actions/user_token";
 
 const GreetingsScreen5 = () => {
     const navigation: any = useNavigation();
@@ -29,6 +30,8 @@ const GreetingsScreen5 = () => {
     const [photoValid, setPhotoValid] = useState(true)
     const [checkBio, setCheckBio] = useState(true)
     const [thesesValid, setThesesValid] = useState(true)
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         AsyncStorage.getItem('userToken').then(r => setUserToken(r))
@@ -138,7 +141,7 @@ const GreetingsScreen5 = () => {
         }
 
         try {
-            const response = await axios.put(baseUrl + '/coach/update_me/', dataForm, {
+            const {data} = await axios.put(baseUrl + '/coach/update_me/', dataForm, {
                 headers: {
                     'Authorization': AuthStr,
                     'Content-Type': 'multipart/form-data'
@@ -150,8 +153,9 @@ const GreetingsScreen5 = () => {
             setPhotoValid(true)
             setEducationValid(true)
             setResumeValid(true)
-            navigation.navigate('Greetings6')
-            console.log(response, 'sended-all')
+            //navigation.navigate('Greetings6')
+            console.log(data, 'sended-all');
+            dispatch(setUserBio(data.bio));
         } catch (error) {
             console.log(error)
         }
