@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, Pressable, TouchableOpacity} from "react-native";
 import Container from "../../components/Container";
 import BackButton from "../../components/BackButton";
 import PhoneInput from 'react-native-phone-input'
@@ -9,6 +9,7 @@ import {useNavigation} from "@react-navigation/native";
 import {useSelector} from "react-redux";
 import axios from "axios";
 import Title from "../../components/Title";
+import {baseUrl} from "../../helpers/url";
 
 const CreateAccountScreen = () => {
     const navigation: any = useNavigation();
@@ -26,7 +27,7 @@ const CreateAccountScreen = () => {
         form.append('phone_number', value);
 
         try {
-            const response = await axios.post('http://137.184.130.229/user/coach/', form, {
+            const response = await axios.post(baseUrl + '/coach/', form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -36,7 +37,7 @@ const CreateAccountScreen = () => {
             console.log(error)
         }
         try {
-            const response1 = await axios.post('http://137.184.130.229/user/send_pin/', phoneForm, {
+            const response1 = await axios.post(baseUrl + '/send_pin/', phoneForm, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -62,9 +63,11 @@ const CreateAccountScreen = () => {
                     <Title titlePropStyle={{marginTop: 25}}>
                         Введите свой телефон
                     </Title>
-                    <Text style={styles.new_number}>
-                        Новый номер
-                    </Text>
+                    <View style={{marginBottom: 15}}>
+                        <Text style={styles.set_sms}>
+                            Мы отправим SMS с кодом подтверждения на {"\n"}Ваш новый номер
+                        </Text>
+                    </View>
                 </View>
                 <View>
                     <PhoneInput
@@ -78,11 +81,16 @@ const CreateAccountScreen = () => {
                         }}
                     />
                 </View>
-                <View>
-                    <Text style={styles.set_sms}>
-                        Мы отправим SMS с кодом подтверждения на {"\n"}Ваш новый номер
-                    </Text>
-                </View>
+               <TouchableOpacity
+                   activeOpacity={0.6}
+                   style={{alignItems: 'center', marginTop: 15}}
+                   onPress={()=>{navigation.navigate('EmailReg')}}
+               >
+                   <Text style={styles.email_reg}>
+                       Либо вы можете зарегистрироваться по{"\n"}почте
+                   </Text>
+               </TouchableOpacity>
+
             </View>
             <View style={styles.button_box}>
                 <CustomButton
@@ -120,5 +128,11 @@ const styles = StyleSheet.create({
     },
     button_box: {
         marginBottom: 15
+    },
+    email_reg:{
+        textDecorationLine: "underline",
+        textDecorationColor: '#7454CF',
+        color: '#7454CF',
+        textAlign: "center"
     }
 })

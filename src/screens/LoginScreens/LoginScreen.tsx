@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity} from "react-native";
 import Container from "../../components/Container";
 import BackButton from "../../components/BackButton";
 import Title from "../../components/Title";
@@ -8,6 +8,7 @@ import {useNavigation} from "@react-navigation/native";
 import {color1, color2} from "../../helpers/colors";
 import CustomButton from "../../components/CustomButton";
 import axios from "axios";
+import {baseUrl} from "../../helpers/url";
 
 const LoginScreen = () => {
     const navigation: any = useNavigation();
@@ -22,7 +23,7 @@ const LoginScreen = () => {
         let form = new FormData;
         form.append('phone_number', value);
         try {
-            const response1 = await axios.post('http://137.184.130.229/user/send_pin/', form, {
+            const response1 = await axios.post(baseUrl + '/send_pin/', form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -66,11 +67,11 @@ const LoginScreen = () => {
                     />
                 </View>
             </View>
-            <View style={{flex: 1}}>
+            <TouchableOpacity onPress={()=>{navigation.navigate("LoginEmail")}} style={{flex: 1}}>
                 <Text style={styles.text}>
                     Войти по почте
                 </Text>
-            </View>
+            </TouchableOpacity>
             <View style={{marginBottom: 25}}>
                 <CustomButton
                     buttonStyles={{backgroundColor: '#7454CF'}}

@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Title from "../../components/Title";
 import {setUserToken} from "../../store/actions/user_token";
+import {baseUrl} from "../../helpers/url";
 
 const PinCodeScreen = (props: any) => {
     const navigation: any = useNavigation();
@@ -29,11 +30,11 @@ const PinCodeScreen = (props: any) => {
 
     async function handleSendPin() {
         const pinForm = new FormData()
-        pinForm.append('phone_number', form._parts[2][1])
+        pinForm.append('email_or_phone', form._parts[2][1])
         pinForm.append('password', pin)
         console.log(pinForm)
         try {
-            const response = await axios.post('http://137.184.130.229/user/token/', pinForm, {
+            const response = await axios.post(baseUrl + '/token/', pinForm, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

@@ -10,6 +10,7 @@ import axios from "axios";
 import {setUserToken} from "../../store/actions/user_token";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch} from "react-redux";
+import {baseUrl} from "../../helpers/url";
 
 const LoginPin = (props: any) => {
     const dispatch = useDispatch()
@@ -23,20 +24,20 @@ const LoginPin = (props: any) => {
     const [pin4, setPin4] = useState('')
     const pin = pin1 + pin2 + pin3 + pin4
 
-    console.log(props.phone_number, 'hpo')
+    console.log(props.email, 'hpo')
     useEffect(() => {
         const form = new FormData()
         form.append('phone_number', props.phone_number)
         // @ts-ignore
         form.append('password', pin)
         if (pin.length === 4) {
-            fetch('http://137.184.130.229/user/token/', {
+            fetch(baseUrl + '/token/', {
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    phone_number: props.phone_number,
+                    email_or_phone: props.email,
                     password: pin
                 })
             }).then((res) => {
@@ -150,15 +151,3 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
-
-
-// try {
-//     const response = axios.post('http://137.184.130.229/user/token/', form, {
-//         headers: {
-//             'Content-Type': 'multipart/form-data'
-//         }
-//     })
-//     console.log(response)
-// }catch (error){
-//     console.log(error, 'err')
-// }

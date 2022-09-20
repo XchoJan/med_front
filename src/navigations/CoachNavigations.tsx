@@ -10,7 +10,9 @@ import {
     PinCodeScreen,
     EnterNameScreen,
     LoginScreen,
-    LoginPinScreen
+    LoginPinScreen,
+    EmailRegistration,
+    LoginWithEmailScreen
 } from '../screens'
 
 function First() {
@@ -33,9 +35,16 @@ function PinCode() {
 function Login() {
     return <LoginScreen/>
 }
-function LoginPin({ route, navigation }: any) {
-    const {phone_number} = route?.params
-    return <LoginPinScreen phone_number={phone_number}/>
+function EmailReg() {
+    return <EmailRegistration/>
+}
+function LoginPin({ route }: any) {
+    const {phone_number, email} = route?.params
+    return <LoginPinScreen email={email} phone_number={phone_number}/>
+}
+
+function LoginEmail({ route }: any) {
+    return <LoginWithEmailScreen />
 }
 
 export default function Coach() {
@@ -84,6 +93,18 @@ export default function Coach() {
                         })}
             />
             <Tab.Screen name='LoginPin' component={LoginPin}
+                        options={({route}) => ({
+                            tabBarButton: () => null,
+                            tabBarStyle: {display: 'none'},
+                        })}
+            />
+            <Tab.Screen name='EmailReg' component={EmailReg}
+                        options={({route}) => ({
+                            tabBarButton: () => null,
+                            tabBarStyle: {display: 'none'},
+                        })}
+            />
+            <Tab.Screen name='LoginEmail' component={LoginEmail}
                         options={({route}) => ({
                             tabBarButton: () => null,
                             tabBarStyle: {display: 'none'},

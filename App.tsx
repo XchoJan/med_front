@@ -10,6 +10,8 @@ import CoachVerify from "./src/navigations/CoachVerifyNavigations";
 import axios from "axios";
 import {setUserData} from "./src/store/actions/user_data";
 import {setUserToken} from "./src/store/actions/user_token";
+import {baseUrl} from "./src/helpers/url";
+import Main from "./src/navigations/CoachMainNavigations";
 
 const AppWrapper = () => {
     return (
@@ -22,6 +24,7 @@ const AppWrapper = () => {
 const App = () => {
     let [token, setToken] = useState<any>(null)
     let tokenFromReducer = useSelector((store: any) => store.user_token.user_token);
+    let [verifiedUser, setVerifiedUser] = useState(false)
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -36,12 +39,15 @@ const App = () => {
 
     useEffect(() => {
         if (token) {
-            axios.get('http://137.184.130.229/user/me/', {
+            axios.get(baseUrl +'/me/', {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                 },
             }).then((res) => {
                 console.log(res.data, 'eee')
+               if (res.data.bio){
+                   setVerifiedUser(true)
+               }
                 dispatch(setUserData(res.data))
             })
         }

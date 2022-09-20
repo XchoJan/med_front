@@ -12,6 +12,7 @@ import axios from "axios";
 import Delete from "../../assets/Icons/Delete";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ErrorPopUp from "../../components/ErrorPopUp";
+import {baseUrl} from "../../helpers/url";
 
 const GreetingsScreen5 = () => {
     const navigation: any = useNavigation();
@@ -48,6 +49,7 @@ const GreetingsScreen5 = () => {
                 id: Date.now(),
                 lastModified: Date.now(),
             });
+            setEducationValid(true)
         }
     };
 
@@ -66,6 +68,7 @@ const GreetingsScreen5 = () => {
                 id: Date.now(),
                 lastModified: Date.now(),
             });
+            setResumeValid(true)
         }
     }
     const pickPhoto = async () => {
@@ -83,6 +86,7 @@ const GreetingsScreen5 = () => {
                 id: Date.now(),
                 lastModified: Date.now(),
             });
+            setPhotoValid(true)
         }
     }
 
@@ -134,7 +138,7 @@ const GreetingsScreen5 = () => {
         }
 
         try {
-            const response = await axios.put('http://137.184.130.229/user/coach/update_me/', dataForm, {
+            const response = await axios.put(baseUrl + '/coach/update_me/', dataForm, {
                 headers: {
                     'Authorization': AuthStr,
                     'Content-Type': 'multipart/form-data'
@@ -146,11 +150,11 @@ const GreetingsScreen5 = () => {
             setPhotoValid(true)
             setEducationValid(true)
             setResumeValid(true)
+            navigation.navigate('Greetings6')
             console.log(response, 'sended-all')
         } catch (error) {
             console.log(error)
         }
-        console.log(333333333333333333)
     }
 
     return (

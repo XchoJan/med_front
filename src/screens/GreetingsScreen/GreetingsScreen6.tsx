@@ -14,12 +14,12 @@ const GreetingsScreen6 = () => {
     const [status, setStatus] = React.useState({});
     return (
         <Container containerProp={styles.inlineContainer}>
+            <View style={{marginBottom: 20}}>
+                <BackButton onPress={() => {
+                    navigation.navigate('Greetings5')
+                }}/>
+            </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
-                    <BackButton onPress={() => {
-                        navigation.navigate('Greetings5')
-                    }}/>
-                </View>
                 <View>
                     <Title>
                         Теперь переходим к знакомству с клиентом
@@ -39,7 +39,7 @@ const GreetingsScreen6 = () => {
                         onPlaybackStatusUpdate={status => setStatus(() => status)}
                     />
                 </View>
-                <View style={{marginBottom: 210}}>
+                <View style={{marginBottom: '10%'}}>
                     <View>
                         <Title titlePropStyle={{marginTop: 15, marginBottom: 10}}>
                             Задание
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 250,
         marginVertical: 15,
-        borderRadius: 10
+        borderRadius: 20
     },
     input_box: {
         backgroundColor: color2,

@@ -5,7 +5,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 let Tab = createBottomTabNavigator();
 
 import {
-    HomeScreen
+    HomeScreen,
+
 } from "../screens/MainScreens";
 
 function Home() {
@@ -19,12 +20,7 @@ export default function Main(){
         screenOptions={{
             headerShown: false
         }}>
-        <Tab.Screen name='Home' component={Home}
-                    options={({route}) => ({
-                        tabBarButton: () => null,
-                        tabBarStyle: {display: 'none'},
-                    })}
-        />
+        <Tab.Screen name='Home' component={Home}/>
     </Tab.Navigator>
     )
 }
