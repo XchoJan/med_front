@@ -47,8 +47,8 @@ const App = () => {
                 console.log(res.data, 'eee')
                 dispatch(setUserData(res.data))
                 if (res.data.bio){
-                   setBio(res.data.bio)
-               }
+                    setBio(res.data.bio)
+                }
             }).catch(e => {
                 console.log(e.message, 'error while getting my profile')
             })
@@ -64,7 +64,7 @@ const App = () => {
         <NavigationContainer>
             {!tokenFromReducer ?
                 <Coach/>
-                 :
+                :
                 !bio ? <CoachVerify/> : <Main />
             }
         </NavigationContainer>

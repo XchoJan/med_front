@@ -7,7 +7,7 @@ let Tab = createBottomTabNavigator();
 import {
     HomeScreen,
 
-} from "../screens/MainScreens";
+} from "../screens/CoacheScreens/MainScreens";
 
 function Home() {
     return <HomeScreen/>

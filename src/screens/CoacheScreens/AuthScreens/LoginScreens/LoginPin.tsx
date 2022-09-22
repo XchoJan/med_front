@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {View, StyleSheet, Text, TextInput} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
-import Title from "../../components/Title";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
+import Title from "../../../../components/Title";
 import {useNavigation} from "@react-navigation/native";
 import {useEffect, useRef, useState} from "react";
-import {color2} from "../../helpers/colors";
+import {color2} from "../../../../helpers/colors";
 import axios from "axios";
-import {setUserToken} from "../../store/actions/user_token";
+import {setUserToken} from "../../../../store/actions/user_token";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch} from "react-redux";
-import {baseUrl} from "../../helpers/url";
+import {baseUrl} from "../../../../helpers/url";
 
 const LoginPin = (props: any) => {
     const dispatch = useDispatch()

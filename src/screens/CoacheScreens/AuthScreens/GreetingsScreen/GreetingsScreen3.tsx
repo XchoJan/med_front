@@ -1,10 +1,10 @@
 import React from 'react';
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
 import {View, Text, StyleSheet} from "react-native";
-import CustomButton from "../../components/CustomButton";
+import CustomButton from "../../../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
-import Title from "../../components/Title";
+import Title from "../../../../components/Title";
 
 const GreetingsScreen3 = () => {
     const navigation: any = useNavigation();

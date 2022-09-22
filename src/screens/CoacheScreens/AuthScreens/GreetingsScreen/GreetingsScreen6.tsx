@@ -1,12 +1,12 @@
 import React, {useRef} from 'react';
 import {View, Text, StyleSheet, TextInput, ScrollView} from 'react-native'
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
 import {useNavigation} from "@react-navigation/native";
 import {Video} from "expo-av";
-import {color2} from "../../helpers/colors";
-import CustomButton from "../../components/CustomButton";
-import Title from "../../components/Title";
+import {color2} from "../../../../helpers/colors";
+import CustomButton from "../../../../components/CustomButton";
+import Title from "../../../../components/Title";
 
 const GreetingsScreen6 = () => {
     const navigation: any = useNavigation();

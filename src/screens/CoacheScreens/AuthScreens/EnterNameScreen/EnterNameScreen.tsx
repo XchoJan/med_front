@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import Container from "../../components/Container";
+import Container from "../../../../components/Container";
 import {Text, StyleSheet, View, TextInput, Image, TouchableOpacity} from 'react-native';
-import BackButton from "../../components/BackButton";
+import BackButton from "../../../../components/BackButton";
 import {useNavigation} from "@react-navigation/native";
-import PenIcon from "../../assets/Icons/PenIcon";
-import {color1, color2} from "../../helpers/colors";
-import CustomButton from "../../components/CustomButton";
+import PenIcon from "../../../../assets/Icons/PenIcon";
+import {color1, color2} from "../../../../helpers/colors";
+import CustomButton from "../../../../components/CustomButton";
 import * as ImagePicker from 'expo-image-picker';
 import {useDispatch} from "react-redux";
-import {setFormData} from "../../store/actions/auth_data";
-import Title from "../../components/Title";
+import {setFormData} from "../../../../store/actions/auth_data";
+import Title from "../../../../components/Title";
 
 const EnterNameScreen = () => {
     const navigation: any = useNavigation();

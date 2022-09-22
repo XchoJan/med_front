@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
 import {useNavigation} from "@react-navigation/native";
-import Doctor from "../../assets/Icons/Doctor";
-import CustomButton from "../../components/CustomButton";
-import Title from "../../components/Title";
+import Doctor from "../../../../assets/Icons/Doctor";
+import CustomButton from "../../../../components/CustomButton";
+import Title from "../../../../components/Title";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {deleteUserBio, deleteUserToken} from "../../store/actions/user_token";
+import {deleteUserBio, deleteUserToken} from "../../../../store/actions/user_token";
 
 const GreetingsScreen = (props: any) => {
     const dispatch = useDispatch()

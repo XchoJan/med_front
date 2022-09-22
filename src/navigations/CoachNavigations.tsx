@@ -12,8 +12,8 @@ import {
     LoginScreen,
     LoginPinScreen,
     EmailRegistration,
-    LoginWithEmailScreen
-} from '../screens'
+    LoginWithEmailScreen,
+} from '../screens/CoacheScreens/AuthScreens'
 
 function First() {
     return <FirstScreen/>
@@ -47,14 +47,14 @@ function LoginEmail({ route }: any) {
     return <LoginWithEmailScreen />
 }
 
+
 export default function Coach() {
     return (
         <Tab.Navigator
-            initialRouteName='Coach'
+            initialRouteName='First'
             screenOptions={{
                 headerShown: false
             }}>
-
             <Tab.Screen name='First' component={First}
                         options={({route}) => ({
                             tabBarButton: () => null,

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, Image, FlatList, Pressable} from "react-native";
 import {NativeStackScreenProps} from "react-native-screens/native-stack";
-import Container from "../../components/Container";
-import {color1} from "../../helpers/colors";
+import Container from "../../../../components/Container";
+import {color1} from "../../../../helpers/colors";
 import AppIntroSlider from 'react-native-app-intro-slider';
-import CustomButton from "../../components/CustomButton";
+import CustomButton from "../../../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
 
 const FirstScreen: React.FC = (props) => {
@@ -29,7 +29,7 @@ const FirstScreen: React.FC = (props) => {
             <View style={{flex: 1}}>
                 <Image
                     style={styles.image}
-                    source={require('../../assets/images/doctor.png')}/>
+                    source={require('../../../../assets/images/doctor.png')}/>
             </View>
             <View style={styles.wrapper}>
                 <Text style={styles.line}/>

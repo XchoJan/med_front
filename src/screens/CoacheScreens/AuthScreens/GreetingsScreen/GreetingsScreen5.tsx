@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Text, ScrollView, TextInput, Pressable, TouchableOpacity} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
-import {color1, color2} from "../../helpers/colors";
-import CustomButton from "../../components/CustomButton";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
+import {color1, color2} from "../../../../helpers/colors";
+import CustomButton from "../../../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
-import Title from "../../components/Title";
+import Title from "../../../../components/Title";
 import * as ImagePicker from "expo-image-picker";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-import Delete from "../../assets/Icons/Delete";
+import Delete from "../../../../assets/Icons/Delete";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ErrorPopUp from "../../components/ErrorPopUp";
-import {baseUrl} from "../../helpers/url";
-import {setUserBio} from "../../store/actions/user_token";
+import ErrorPopUp from "../../../../components/ErrorPopUp";
+import {baseUrl} from "../../../../helpers/url";
+import {setUserBio} from "../../../../store/actions/user_token";
 
 const GreetingsScreen5 = () => {
     const navigation: any = useNavigation();

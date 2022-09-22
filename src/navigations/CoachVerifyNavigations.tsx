@@ -11,7 +11,7 @@ import {
     GreetingsScreen5,
     GreetingsScreen6,
     GreetingsScreen7,
-} from '../screens'
+} from '../screens/CoacheScreens/AuthScreens'
 
 
 function Greetings() {

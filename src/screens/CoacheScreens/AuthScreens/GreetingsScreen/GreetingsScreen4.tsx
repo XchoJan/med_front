@@ -1,12 +1,12 @@
 import React, {useRef} from 'react';
 import {View, StyleSheet, Text, Button, ScrollView, TextInput} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
 import {Video} from 'expo-av';
-import {color2} from "../../helpers/colors";
-import CustomButton from "../../components/CustomButton";
+import {color2} from "../../../../helpers/colors";
+import CustomButton from "../../../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
-import Title from "../../components/Title";
+import Title from "../../../../components/Title";
 
 const GreetingsScreen4 = (props: any) => {
     const navigation: any = useNavigation();

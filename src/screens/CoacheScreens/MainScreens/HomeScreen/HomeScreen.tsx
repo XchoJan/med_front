@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from "react-native";
-import MainContainer from "../../../components/MainContainer";
+import MainContainer from "../../../../components/MainContainer";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
-import {color1} from "../../../helpers/colors";
-import BellIcon from "../../../assets/Icons/BellIcon";
-import Title from "../../../components/Title";
-import CustomButton from "../../../components/CustomButton";
+import {color1} from "../../../../helpers/colors";
+import BellIcon from "../../../../assets/Icons/BellIcon";
+import Title from "../../../../components/Title";
+import CustomButton from "../../../../components/CustomButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {deleteUserBio, deleteUserToken} from "../../../store/actions/user_token";
+import {deleteUserBio, deleteUserToken} from "../../../../store/actions/user_token";
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
@@ -30,7 +30,7 @@ const HomeScreen = () => {
                         <Image style={styles.image} source={{uri: user_data.photo}}/>
                     </View>
                     <Text style={styles.username}>
-                        {user_data.user.username}
+                        {user_data?.user?.username}
                     </Text>
                 </View>
                 <View style={{top: 15}}>
@@ -39,7 +39,7 @@ const HomeScreen = () => {
             </View>
             <View style={{marginTop: 10}}>
                 <Title>
-                    Добрый день {user_data.user.username}
+                    Добрый день {user_data?.user?.username}
                 </Title>
             </View>
             <View style={{justifyContent: 'center', alignItems: 'center', flex: 1,}}>

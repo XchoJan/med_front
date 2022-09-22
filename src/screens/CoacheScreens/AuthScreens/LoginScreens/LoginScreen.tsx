@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
-import Title from "../../components/Title";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
+import Title from "../../../../components/Title";
 import PhoneInput from "react-native-phone-input";
 import {useNavigation} from "@react-navigation/native";
-import {color1, color2} from "../../helpers/colors";
-import CustomButton from "../../components/CustomButton";
+import {color1, color2} from "../../../../helpers/colors";
+import CustomButton from "../../../../components/CustomButton";
 import axios from "axios";
-import {baseUrl} from "../../helpers/url";
+import {baseUrl} from "../../../../helpers/url";
 
 const LoginScreen = () => {
     const navigation: any = useNavigation();

@@ -1,17 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
-import {color2, color3} from "../../helpers/colors";
-import ErrorIcon from "../../assets/Icons/ErrorIcon";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
+import {color2, color3} from "../../../../helpers/colors";
+import ErrorIcon from "../../../../assets/Icons/ErrorIcon";
 import {useNavigation} from "@react-navigation/native";
-import CustomButton from "../../components/CustomButton";
+import CustomButton from "../../../../components/CustomButton";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Title from "../../components/Title";
-import {setUserToken} from "../../store/actions/user_token";
-import {baseUrl} from "../../helpers/url";
+import Title from "../../../../components/Title";
+import {setUserToken} from "../../../../store/actions/user_token";
+import {baseUrl} from "../../../../helpers/url";
 
 const PinCodeScreen = (props: any) => {
     const navigation: any = useNavigation();

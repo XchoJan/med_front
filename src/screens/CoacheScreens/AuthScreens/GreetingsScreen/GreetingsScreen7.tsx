@@ -1,12 +1,12 @@
 import React from 'react';
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
 import {View, Text, StyleSheet} from 'react-native'
-import DoctorComputer from "../../assets/Icons/DoctorComputer";
-import CustomButton from "../../components/CustomButton";
-import {color1} from "../../helpers/colors";
+import DoctorComputer from "../../../../assets/Icons/DoctorComputer";
+import CustomButton from "../../../../components/CustomButton";
+import {color1} from "../../../../helpers/colors";
 import {useNavigation} from "@react-navigation/native";
-import Title from "../../components/Title";
+import Title from "../../../../components/Title";
 
 const GreetingsScreen7 = () => {
     const navigation: any = useNavigation();

@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet} from "react-native";
-import AppLogo from "../../assets/Icons/AppLogo";
-import Container from "../../components/Container";
-import {color1} from "../../helpers/colors";
-import CustomButton from "../../components/CustomButton";
+import AppLogo from "../../../../assets/Icons/AppLogo";
+import Container from "../../../../components/Container";
+import {color1} from "../../../../helpers/colors";
+import CustomButton from "../../../../components/CustomButton";
 import {useNavigation} from "@react-navigation/native";
 
 const WelcomeScreen : React.FC = (props) => {

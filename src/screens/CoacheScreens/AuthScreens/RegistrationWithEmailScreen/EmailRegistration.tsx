@@ -1,33 +1,43 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, TextInput} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
-import Title from "../../components/Title";
-import CustomButton from "../../components/CustomButton";
+import {Text, StyleSheet, View, TextInput} from "react-native";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
+import Title from "../../../../components/Title";
+import CustomButton from "../../../../components/CustomButton";
 import axios from "axios";
-import {baseUrl} from "../../helpers/url";
+import {useSelector} from "react-redux";
+import {baseUrl} from "../../../../helpers/url";
 import {useNavigation} from "@react-navigation/native";
 
-const LoginWithEmailScreen = () => {
+const EmailRegistration = () => {
     const navigation: any = useNavigation();
-    const [email, setEmail] = useState('')
+    let form = useSelector((store: any) => store.auth_data.formData)
+    console.log(form, 'form')
+    const [email, sendEmail] = useState('')
 
-   async function handleSendEmail(){
-        let form = new FormData()
-        form.append('email', email)
-
+   async function handleSendEmail() {
+       let phoneForm = new FormData;
+       phoneForm.append('email', email);
+       form.append('email', email);
         try {
-            const response1 = await axios.post(baseUrl + '/send_pin/', form, {
+            const response = await axios.post(baseUrl + '/coach/', form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            })
+            console.log(response.data, '4444')
+        } catch (error) {
+            console.log(error)
+        }
+        try {
+            const response1 = await axios.post(baseUrl + '/send_pin/', phoneForm,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
             })
             console.log(response1, 'sended-pin')
             if (response1.status === 200){
-                console.log('OK')
-                navigation.navigate('LoginPin',{
-                    email: email
-                })
+                navigation.navigate('PinCode')
             }
         } catch (error) {
             console.log(error)
@@ -39,11 +49,11 @@ const LoginWithEmailScreen = () => {
             <View>
                 <BackButton/>
             </View>
-            <View style={{marginTop: 20}}>
+            <View style={{marginTop: 25}}>
                 <Title>
                     Введите свой Email
                 </Title>
-                <Text style={{color: '#8B8B8B', marginTop: 10}}>
+                <Text style={{marginTop: 20, color: '#8B8B8B'}}>
                     Мы отправим письмо с кодом подтверждения на ваш Email
                 </Text>
             </View>
@@ -52,7 +62,7 @@ const LoginWithEmailScreen = () => {
                     <TextInput
                         style={{left: 10}}
                         placeholder={"Введите почту"}
-                        onChangeText={setEmail}
+                        onChangeText={sendEmail}
                         value={email}
                     />
                 </View>
@@ -67,7 +77,8 @@ const LoginWithEmailScreen = () => {
     );
 };
 
-export default LoginWithEmailScreen;
+export default EmailRegistration;
+
 
 const styles = StyleSheet.create({
     inlineContainer: {

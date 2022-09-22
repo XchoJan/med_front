@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Pressable, TouchableOpacity} from "react-native";
-import Container from "../../components/Container";
-import BackButton from "../../components/BackButton";
+import Container from "../../../../components/Container";
+import BackButton from "../../../../components/BackButton";
 import PhoneInput from 'react-native-phone-input'
-import CustomButton from "../../components/CustomButton";
-import {color1, color2} from "../../helpers/colors";
+import CustomButton from "../../../../components/CustomButton";
+import {color1, color2} from "../../../../helpers/colors";
 import {useNavigation} from "@react-navigation/native";
 import {useSelector} from "react-redux";
 import axios from "axios";
-import Title from "../../components/Title";
-import {baseUrl} from "../../helpers/url";
+import Title from "../../../../components/Title";
+import {baseUrl} from "../../../../helpers/url";
 
 const CreateAccountScreen = () => {
     const navigation: any = useNavigation();
