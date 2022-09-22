@@ -9,6 +9,7 @@ import Title from "../../../../components/Title";
 import CustomButton from "../../../../components/CustomButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {deleteUserBio, deleteUserToken} from "../../../../store/actions/user_token";
+import {deleteUserData} from "../../../../store/actions/user_data";
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
@@ -21,6 +22,7 @@ const HomeScreen = () => {
         await AsyncStorage.removeItem('userToken');
         dispatch(deleteUserToken());
         dispatch(deleteUserBio());
+        dispatch(deleteUserData());
     }
     return (
         <MainContainer>

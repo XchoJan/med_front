@@ -9,6 +9,7 @@ import Title from "../../../../components/Title";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {deleteUserBio, deleteUserToken} from "../../../../store/actions/user_token";
+import {deleteUserData} from "../../../../store/actions/user_data";
 
 const GreetingsScreen = (props: any) => {
     const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const GreetingsScreen = (props: any) => {
       await AsyncStorage.removeItem('userToken');
       dispatch(deleteUserToken());
       dispatch(deleteUserBio());
+      dispatch(deleteUserData());
     }
 
     return (
