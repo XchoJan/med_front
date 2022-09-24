@@ -22,12 +22,16 @@ function First() {
 function Welcome() {
     return <WelcomeScreen/>
 }
+
 function EnterName() {
     return <EnterNameScreen/>
 }
-function CreateAccount() {
-    return <CreateAccountScreen/>
+
+function CreateAccount({route}: any) {
+    const {role} = route?.params
+    return <CreateAccountScreen role={role}/>
 }
+
 function PinCode() {
     return <PinCodeScreen/>
 }
@@ -35,16 +39,19 @@ function PinCode() {
 function Login() {
     return <LoginScreen/>
 }
-function EmailReg() {
-    return <EmailRegistration/>
+
+function EmailReg({route}: any) {
+    const {role} = route?.params
+    return <EmailRegistration role={role}/>
 }
-function LoginPin({ route }: any) {
+
+function LoginPin({route}: any) {
     const {phone_number, email} = route?.params
     return <LoginPinScreen email={email} phone_number={phone_number}/>
 }
 
-function LoginEmail({ route }: any) {
-    return <LoginWithEmailScreen />
+function LoginEmail() {
+    return <LoginWithEmailScreen/>
 }
 
 

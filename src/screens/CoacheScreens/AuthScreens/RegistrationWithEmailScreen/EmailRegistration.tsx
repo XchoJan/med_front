@@ -9,7 +9,7 @@ import {useSelector} from "react-redux";
 import {baseUrl} from "../../../../helpers/url";
 import {useNavigation} from "@react-navigation/native";
 
-const EmailRegistration = () => {
+const EmailRegistration = (props: any) => {
     const navigation: any = useNavigation();
     let form = useSelector((store: any) => store.auth_data.formData)
     console.log(form, 'form')
@@ -20,12 +20,12 @@ const EmailRegistration = () => {
        phoneForm.append('email', email);
        form.append('email', email);
         try {
-            const response = await axios.post(baseUrl + '/coach/', form, {
+            const response = await axios.post(baseUrl + '/' + props?.role + '/', form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
             })
-            console.log(response.data, '4444')
+            console.log(response.data, '')
         } catch (error) {
             console.log(error)
         }

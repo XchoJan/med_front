@@ -8,7 +8,6 @@ export default function reducer(state = initialState, action){
     switch (action.type){
         case USER_TOKEN:{
             const {user_token} = action.payload;
-            console.log(user_token, '3333')
             return {
                 ...state,
                 user_token: user_token
@@ -22,7 +21,6 @@ export default function reducer(state = initialState, action){
         }
         case SET_USER_BIO:{
             const {user_bio} = action.payload;
-            console.log(user_bio, '4444')
             return {
                 ...state,
                 user_bio: user_bio

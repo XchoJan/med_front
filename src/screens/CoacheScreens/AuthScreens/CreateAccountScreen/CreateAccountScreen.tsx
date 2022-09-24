@@ -11,7 +11,8 @@ import axios from "axios";
 import Title from "../../../../components/Title";
 import {baseUrl} from "../../../../helpers/url";
 
-const CreateAccountScreen = () => {
+const CreateAccountScreen = (props: any) => {
+    console.log(props.role, 'props-role')
     const navigation: any = useNavigation();
     const [value, setValue] = useState<string>('')
 
@@ -25,14 +26,13 @@ const CreateAccountScreen = () => {
         let phoneForm = new FormData;
         phoneForm.append('phone_number', value);
         form.append('phone_number', value);
-
         try {
-            const response = await axios.post(baseUrl + '/coach/', form, {
+            const response = await axios.post(baseUrl + '/' + props.role + '/', form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
             })
-            console.log(response.data, '4444')
+            console.log(response, 'ыыыыыыыыыыыыы')
         } catch (error) {
             console.log(error)
         }
@@ -84,7 +84,7 @@ const CreateAccountScreen = () => {
                <TouchableOpacity
                    activeOpacity={0.6}
                    style={{alignItems: 'center', marginTop: 15}}
-                   onPress={()=>{navigation.navigate('EmailReg')}}
+                   onPress={()=>{navigation.navigate('EmailReg', {role: props.role})}}
                >
                    <Text style={styles.email_reg}>
                        Либо вы можете зарегистрироваться по{"\n"}почте

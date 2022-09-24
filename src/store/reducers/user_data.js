@@ -8,7 +8,7 @@ export default function reducer(state = initialState, action){
     switch (action.type){
         case SET_USER_DATA:{
             const {user_data} = action.payload;
-            console.log(user_data, '222222222')
+            console.log(user_data, ' user data')
             return {
                 ...state,
                 user_data: user_data
