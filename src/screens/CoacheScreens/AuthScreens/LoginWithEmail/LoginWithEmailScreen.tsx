@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, TextInput} from "react-native";
+import {View, StyleSheet, Text, TextInput, TouchableOpacity} from "react-native";
 import Container from "../../../../components/Container";
 import BackButton from "../../../../components/BackButton";
 import Title from "../../../../components/Title";
@@ -8,7 +8,7 @@ import axios from "axios";
 import {baseUrl} from "../../../../helpers/url";
 import {useNavigation} from "@react-navigation/native";
 
-const LoginWithEmailScreen = () => {
+const LoginWithEmailScreen = (props: any) => {
     const navigation: any = useNavigation();
     const [email, setEmail] = useState('')
 
@@ -34,10 +34,13 @@ const LoginWithEmailScreen = () => {
         }
     }
 
+    function handleBack(){
+
+    }
     return (
         <Container containerProp={styles.inlineContainer}>
             <View>
-                <BackButton/>
+                <BackButton onPress={()=>{navigation.navigate("CreateAccount")}}/>
             </View>
             <View style={{marginTop: 20}}>
                 <Title>

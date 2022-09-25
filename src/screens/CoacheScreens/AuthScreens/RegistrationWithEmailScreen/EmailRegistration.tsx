@@ -47,7 +47,7 @@ const EmailRegistration = (props: any) => {
     return (
         <Container containerProp={styles.inlineContainer}>
             <View>
-                <BackButton/>
+                <BackButton onPress={()=>{navigation.navigate('CreateAccount',{role: props.role})}}/>
             </View>
             <View style={{marginTop: 25}}>
                 <Title>
