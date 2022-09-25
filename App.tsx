@@ -71,13 +71,13 @@ const App = () => {
     const returnStacks = () => {
         if (!tokenFromReducer){
             return <Coach/>
-        }else if (bio && tokenFromReducer){
+        }else if (bio){
             console.log(444)
             return <Main/>
-        }else if (tokenFromReducer && user_data.user?.role == 'coach' && !bio){
+        }else if (role === 'coach'){
             console.log(333)
             return <CoachVerify/>
-        }else if (tokenFromReducer && role === 'client'){
+        }else if (role === 'client'){
             console.log(222)
             return <ClientVerifyNavigations/>
         }

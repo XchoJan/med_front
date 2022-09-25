@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, Text, Platform, Button, TouchableOpacity} from "react-native";
 import ClientContainer from "../../ClientScreenComponents/ClientContainer";
 import {Title} from "react-native-paper";
@@ -16,16 +16,17 @@ const EnterAgeScreen = () => {
     const navigation: any = useNavigation();
     const dispatch = useDispatch()
     const [date, setDate] = useState<Date>(new Date());
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(Platform.OS === 'ios');
     const [mode, setMode] = useState('date');
 
     const format2 = "YYYY.MM.DD"
-    let date1 = moment(date).format(format2);
 
     const onChange = (event: any, selectedDate: any) => {
-        const currentDate = selectedDate;
-        setShow(false);
-        setDate(currentDate);
+        console.log({selectedDate, event: event.nativeEvent})
+        if (Platform.OS === 'android') {
+            setShow(false);
+        }
+        setDate(selectedDate);
         console.log(selectedDate, 'currentDate')
     };
     let form = useSelector((store: any) => store.auth_data.formData)
@@ -52,7 +53,7 @@ const EnterAgeScreen = () => {
         if (!date) {
             return
         }
-        form.append('birthday', date1)
+        form.append('birthday', moment(date).format(format2))
         navigation.navigate("EnterWeight")
     }
 
@@ -76,24 +77,27 @@ const EnterAgeScreen = () => {
                     Ваш возраст
                 </Title>
                 <Text style={{fontWeight: 'bold', marginTop: 10, fontSize: 28}}>
-                    {date1}
+                    {moment(date).format(format2)}
                 </Text>
             </View>
             <View style={{flex: 1}}>
-                <TouchableOpacity onPress={() => {
-                    setShow(!show)
-                }}>
-                    <Text>
-                        Изменить возраст
-                    </Text>
-                </TouchableOpacity>
+                {Platform.OS === 'android' && (
+                    <TouchableOpacity onPress={() => {
+                        setShow(!show)
+                    }}>
+                        <Text>
+                            Изменить возраст
+                        </Text>
+                    </TouchableOpacity>
+                )}
+
                 {show && <DateTimePicker
                     testID="dateTimePicker"
                     value={date}
                     mode={'date'}
                     onChange={onChange}
-
-                    display={Platform.OS === 'android' ? 'calendar' : 'spinner'}
+                    maximumDate={new Date()}
+                    display={Platform.OS === 'android' ? 'default' : 'spinner'}
                 />}
             </View>
             <View style={{marginBottom: 25}}>

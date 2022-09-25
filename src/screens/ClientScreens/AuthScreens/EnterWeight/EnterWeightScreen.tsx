@@ -35,10 +35,10 @@ const EnterWeightScreen = () => {
         form.append('weight', number)
         try {
             const response = await axios.put(baseUrl + '/client/update_me/', {
-                body: JSON.stringify({
+                body: {
                     gender: 'male',
                     weight: '24'
-                })
+                }
             }, {
                 headers: {
                     'Authorization': AuthStr,
