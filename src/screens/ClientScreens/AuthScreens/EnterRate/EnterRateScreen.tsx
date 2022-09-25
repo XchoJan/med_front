@@ -31,8 +31,8 @@ const EnterRateScreen = () => {
 
     ]
     let premiumData = [
-        {title: 'Объем включенных анализов', key: 1, checked: false},
-        {title: 'Объем консультаций', key: 2, checked: false},
+        {title: 'Объем включенных анализов', key: 1, checked: true},
+        {title: 'Объем консультаций', key: 2, checked: true},
         {title: 'Персональный нутрициолог', key: 3, checked: true},
         {title: 'Персональный психотерапевт', key: 4, checked: true},
         {title: 'Ведение консилиумом врачей', key: 6, checked: true},

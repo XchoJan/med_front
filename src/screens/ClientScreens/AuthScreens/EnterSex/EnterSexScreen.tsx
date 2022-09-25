@@ -10,21 +10,35 @@ import {useNavigation} from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {deleteUserBio, deleteUserToken} from "../../../../store/actions/user_token";
 import {deleteUserData} from "../../../../store/actions/user_data";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import ErrorPopUp from "../../../../components/ErrorPopUp";
+import {setFormData} from "../../../../store/actions/auth_data";
 
 const EnterSexScreen = () => {
     const dispatch = useDispatch()
     const navigation: any = useNavigation();
 
     const genderItems = [
-        {gender: 'Мужской', value: 'man', key: 1},
-        {gender: 'Женский', value: 'woman', key: 2},
+        {gender: 'Мужской', value: 'male', key: 1},
+        {gender: 'Женский', value: 'female', key: 2},
     ]
     const [gender, setGender] = useState('');
+    const [radioGender, setRadioGender] = useState('');
+    const [genderVerify, setGenderVerify] = useState(false)
+
 
     function handleNavigate() {
+        let form = new FormData()
+        if (!gender) {
+            setGenderVerify(true)
+            return
+        }
+        form.append('gender', gender)
+        dispatch(setFormData(form))
+        setGenderVerify(false)
         navigation.navigate('EnterAge')
     }
+
     const logout = async () => {
         await AsyncStorage.removeItem('userToken');
         dispatch(deleteUserToken());
@@ -39,6 +53,7 @@ const EnterSexScreen = () => {
             </Pressable>
             <View style={{width: '100%'}}>
                 <View style={{alignItems: 'center'}}>
+                    {genderVerify && <ErrorPopUp style={{marginTop: 15}} error={'Выберите пол'}/>}
                     <Title>
                         1 из 4
                     </Title>
@@ -53,7 +68,8 @@ const EnterSexScreen = () => {
             <View style={{flex: 1}}>
                 {genderItems.map((item) => (
                     <TouchableOpacity style={styles.roleBox} onPress={() => {
-                        setGender(item.gender)
+                        setGender(item.value)
+                        setRadioGender(item.gender)
                     }}>
                         <Text style={styles.roleItem} key={item.key}>
                             {item.gender}
@@ -61,7 +77,7 @@ const EnterSexScreen = () => {
                         <Text>
                             <RadioButton
                                 value="first"
-                                status={gender === item.gender ? 'checked' : 'unchecked'}
+                                status={radioGender === item.gender ? 'checked' : 'unchecked'}
                                 uncheckedColor={color1}
                                 color={color1}
                             />

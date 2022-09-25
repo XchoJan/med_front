@@ -9,9 +9,12 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import CustomButton from "../../../../components/CustomButton";
 import moment, {Moment} from "moment";
 import NumberPlease from 'react-native-number-please';
+import {useDispatch, useSelector} from "react-redux";
+import {setFormData} from "../../../../store/actions/auth_data";
 
 const EnterAgeScreen = () => {
     const navigation: any = useNavigation();
+    const dispatch = useDispatch()
     const [date, setDate] = useState<Date>(new Date());
     const [show, setShow] = useState(false);
     const [mode, setMode] = useState('date');
@@ -25,6 +28,7 @@ const EnterAgeScreen = () => {
         setDate(currentDate);
         console.log(selectedDate, 'currentDate')
     };
+    let form = useSelector((store: any) => store.auth_data.formData)
 
     const showMode = (currentMode: string) => {
         if (Platform.OS === 'android') {
@@ -43,6 +47,14 @@ const EnterAgeScreen = () => {
         showMode('time');
     };
 
+    function handleNext() {
+        const dateForm = new FormData()
+        if (!date) {
+            return
+        }
+        form.append('birthday', date1)
+        navigation.navigate("EnterWeight")
+    }
 
     return (
         <ClientContainer>
@@ -64,11 +76,13 @@ const EnterAgeScreen = () => {
                     Ваш возраст
                 </Title>
                 <Text style={{fontWeight: 'bold', marginTop: 10, fontSize: 28}}>
-                    {/*{date1}*/}
+                    {date1}
                 </Text>
             </View>
             <View style={{flex: 1}}>
-                <TouchableOpacity onPress={()=>{setShow(!show)}}>
+                <TouchableOpacity onPress={() => {
+                    setShow(!show)
+                }}>
                     <Text>
                         Изменить возраст
                     </Text>
@@ -85,7 +99,7 @@ const EnterAgeScreen = () => {
             <View style={{marginBottom: 25}}>
                 <CustomButton
                     title={'Продолжить'}
-                    onPress={()=>{navigation.navigate("EnterWeight")}}
+                    onPress={handleNext}
                 />
             </View>
         </ClientContainer>

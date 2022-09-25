@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import {LogBox} from "react-native";
 import Coach from "./src/navigations/CoachNavigations";
 import {NavigationContainer} from "@react-navigation/native";
 import {Provider, useDispatch, useSelector} from "react-redux";
@@ -13,6 +13,7 @@ import {setUserToken} from "./src/store/actions/user_token";
 import {baseUrl} from "./src/helpers/url";
 import Main from "./src/navigations/CoachMainNavigations";
 import ClientVerifyNavigations from "./src/navigations/ClientNavigations/ClientVerifyNavigations";
+LogBox.ignoreAllLogs(true)
 
 const AppWrapper = () => {
     return (
@@ -27,7 +28,6 @@ const App = () => {
     let tokenFromReducer = useSelector((store: any) => store.user_token.user_token);
     let bioFromReducer = useSelector((store: any) => store.user_token.user_bio);
     let user_data = useSelector((store: any) => store.user_data?.user_data)
-    console.log(user_data, 'appp')
     let [verifiedUser, setVerifiedUser] = useState(false)
     let [role, setRole] = useState('')
     const dispatch = useDispatch()
@@ -74,7 +74,7 @@ const App = () => {
         }else if (bio && tokenFromReducer){
             console.log(444)
             return <Main/>
-        }else if (tokenFromReducer && user_data.user?.role === 'coach' && !bio){
+        }else if (tokenFromReducer && user_data.user?.role == 'coach' && !bio){
             console.log(333)
             return <CoachVerify/>
         }else if (tokenFromReducer && role === 'client'){
